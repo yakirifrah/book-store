@@ -1,13 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Cart } from '../components';
 import { CartConsumer } from '../context/cart';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import styled from 'styled-components/macro';
+
 import { Button } from 'antd';
-export function CartContainer() {
-	const addDefaultSrc = (event) => {
-		event.target.src = '/images/books/default-placeholder-image-300x300.png';
+import { useHistory } from 'react-router-dom';
+import { authUserListener } from '../utils';
+import { Modal } from '../components';
+import { Login } from '../pages/common';
+import styled from 'styled-components/macro';
+import { addDefaultSrc } from '../utils';
+export default function CartContainer() {
+	const history = useHistory();
+	const [showModalLogin, setShowModalLogin] = useState(false);
+	const [showModalOrder, setShowModalOrder] = useState(false);
+	const handleOnClickBtnPay = (event) => {
+		if (!authUserListener()) {
+			return setShowModalLogin(true);
+		}
+		return setShowModalOrder(true);
+	};
+
+
+	const handelOnOKConfirmOrder = (event, cb) => {
+		const userId = authUserListener().user_id;
+		cb(userId);
+		return history.goBack();
 	};
 	return (
 		<CartConsumer>
@@ -20,7 +39,7 @@ export function CartContainer() {
 									<Cart.Meta>
 										<Cart.Image
 											src={`/images/books/${item.title}.jpg`}
-											onError={addDefaultSrc}
+											onError={(e) => addDefaultSrc(e)}
 										/>
 										<div
 											style={{
@@ -76,9 +95,34 @@ export function CartContainer() {
 									type="primary"
 									size="large"
 									className="complete_order_payment"
+									onClick={handleOnClickBtnPay}
 								>
 									Completion of order and payment
 								</Button>
+								<Modal
+									title="login"
+									visible={showModalLogin}
+									onCancel={() => setShowModalLogin(false)}
+									bodyStyle={{
+										backgroundColor: '#333333',
+										height: 'fit-content',
+									}}
+									cancelButtonProps={{ style: { display: 'none' } }}
+									okButtonProps={{ style: { display: 'none' } }}
+									login
+								>
+									<Login />
+								</Modal>
+								<Modal
+									title="The order"
+									visible={showModalOrder}
+									onCancel={() => setShowModalOrder(false)}
+									onOk={(event) =>
+										handelOnOKConfirmOrder(event, value.addToHistoryPurchase)
+									}
+								>
+									<h3>Click Okay to confirm the order</h3>
+								</Modal>
 							</Footer>
 						)}
 					</Cart>

@@ -15,15 +15,19 @@ export const signOutAdmin = () => {
 
 export const authUserListener = () => {
 	const user = JSON.parse(localStorage.getItem('login'));
-		if (!user?.login || !user?.token || user?.role !== 'user') {
-			return;
-		}
-		return user;
-}
+	if (!user?.login || !user?.token || user?.role !== 'user') {
+		return;
+	}
+	return user;
+};
 
-export const signOutUser= () => {
+export const signOutUser = () => {
 	const user = JSON.parse(localStorage.getItem('login'));
 	if (user?.login && user?.token && user?.role === 'user') {
 		return localStorage.clear();
 	}
+};
+
+export const addDefaultSrc = (event) => {
+	event.target.src = '/images/books/default-placeholder-image-300x300.png';
 };

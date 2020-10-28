@@ -127,6 +127,7 @@ export const NumOfItems = styled.div`
 
 export const Icon = styled(ReachRouterLink)`
 	cursor: pointer;
+	margin: 4em;
 	position: relative;
 	.fa-shopping-cart {
 		&::before {
@@ -138,5 +139,5 @@ export const Icon = styled(ReachRouterLink)`
 export const Title = styled.h1`
 	font-size: 25px;
 	color: white;
-	text-align:center;
+	text-align: center;
 `;

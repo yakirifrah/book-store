@@ -1,10 +1,8 @@
 import React from 'react';
-import AdminContainer from '../../containers/admin';
+import {AdminContainer} from '../../containers';
+import { signOutUser } from '../../utils';
 
-
-export default function admin({match }) {
-  return (
-    <AdminContainer match={match}/>
-  );
+export default function admin({ match }) {
+	signOutUser();
+	return <AdminContainer match={match} />;
 }
- 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { faShoppingCart, faHistory } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { Link } from 'react-router-dom';
@@ -11,7 +11,8 @@ import { authAdminListener, signOutAdmin } from '../utils';
 import { useLocation } from 'react-router-dom';
 import { CartConsumer } from '../context/cart';
 import * as ROUTES from '../constants/routes';
-export function BrowseContainer() {
+import { addDefaultSrc } from '../utils';
+export default function BrowseContainer() {
 	// state
 	const [books, setBooks] = useState([]);
 	const [error, setError] = useState('');
@@ -94,7 +95,7 @@ export function BrowseContainer() {
 								<Card.Image
 									alt="book"
 									src={`/images/books/${item.title}.jpg`}
-									onError={addDefaultSrc}
+									onError={(e) => addDefaultSrc(e)}
 									onClick={() => handleEditItem(item)}
 									editBook
 								/>
@@ -113,7 +114,7 @@ export function BrowseContainer() {
 		<>
 			<Card.Title>{item.title}</Card.Title>
 			<Card.Title>{item.price}&#8362;</Card.Title>
-			<div class="book__details">
+			<div className="book__details">
 				{' '}
 				<h4>Summery:</h4>
 				<hr />
@@ -139,16 +140,27 @@ export function BrowseContainer() {
 								searchTerm={searchTerm}
 								setSearchTerm={setSearchTerm}
 							/>
-							<Header.Icon to={ROUTES.MY_CART}>
-								<FontAwesomeIcon
-									icon={faShoppingCart}
-									color="white"
-									size="lg"
-								/>
-								{value.sumQuantity() > 0 && (
-									<Header.NumOfItems>{value.sumQuantity()}</Header.NumOfItems>
-								)}
-							</Header.Icon>
+							<div className="wrapper__icon__user">
+								<Header.Icon to={ROUTES.MY_ORDER_HISTORY}>
+									<FontAwesomeIcon
+										icon={faHistory}
+										color="white"
+										size="lg"
+										title="order history"
+									/>
+								</Header.Icon>
+								<Header.Icon to={ROUTES.MY_CART}>
+									<FontAwesomeIcon
+										icon={faShoppingCart}
+										color="white"
+										size="lg"
+										title="shooing cart"
+									/>
+									{value.sumQuantity() > 0 && (
+										<Header.NumOfItems>{value.sumQuantity()}</Header.NumOfItems>
+									)}
+								</Header.Icon>
+							</div>
 						</Header>
 					</div>
 					<Card>
@@ -159,7 +171,7 @@ export function BrowseContainer() {
 										<Card.Image
 											alt="book"
 											src={`/images/books/${item.title}.jpg`}
-											onError={addDefaultSrc}
+											onError={(e) => addDefaultSrc(e)}
 											onClick={() => handleEditItem(item)}
 										/>
 										{commonArea(item)}
@@ -181,9 +193,6 @@ export function BrowseContainer() {
 		</CartConsumer>
 	);
 
-	const addDefaultSrc = (event) => {
-		event.target.src = '/images/books/default-placeholder-image-300x300.png';
-	};
 
 	const handleOnClick = (id) => {
 		setVisible(true);

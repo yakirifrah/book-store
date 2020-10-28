@@ -1,14 +1,18 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext } from 'react';
 import { UseLocalStorage } from './../hooks';
 const CartContext = createContext();
 
 const CartProvider = ({ children }) => {
 	const [cart, setCart] = UseLocalStorage('cart', []);
-	const [historyPurchase, setHistoryPurchase] = useState({});
-	const addToHistoryPurchase = (_id, items) => {
-		setHistoryPurchase({
-			_id: [...items],
-		});
+	const [historyPurchase, setHistoryPurchase] = UseLocalStorage('history', {});
+	const addToHistoryPurchase = (_id) => {
+		let historyOrders = { ...historyPurchase };
+		if (historyOrders[_id]) {
+			historyOrders[_id].push(cart);
+		}
+		historyOrders[_id] = [...cart];
+		setHistoryPurchase({ ...historyOrders });
+		setCart([]);
 	};
 
 	const deleteItem = (_id) => {
@@ -24,7 +28,6 @@ const CartProvider = ({ children }) => {
 		if (!tempCart?.length) {
 			quantity = 1;
 			item.quantity = quantity;
-			console.log(item);
 			return setCart((prevCart) => [...prevCart, item]);
 		}
 		const selectedCart = tempCart.find((el) => el._id === item._id);
@@ -42,8 +45,12 @@ const CartProvider = ({ children }) => {
 	};
 
 	const totalPurchaseToPay = () => {
-				return cart.reduce((a, b) => a + (b.quantity * b.price || 0), 0);
+		return cart.reduce((a, b) => a + (b.quantity * b.price || 0), 0);
+	};
 
+	const getHistoryPurchasesById = (_id) => {
+		let history = JSON.parse(localStorage.getItem('history'));
+		return history[_id];
 	}
 
 	return (
@@ -56,6 +63,7 @@ const CartProvider = ({ children }) => {
 				addToHistoryPurchase: addToHistoryPurchase,
 				sumQuantity: sumQuantity,
 				totalPurchaseToPay: totalPurchaseToPay,
+				getHistoryPurchasesById: getHistoryPurchasesById,
 			}}
 		>
 			{children}

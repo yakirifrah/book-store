@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { authAdminListener } from '../utils';
+import { authAdminListener, authUserListener } from '../utils';
 
 export function PrivateAdminRoute({ ...restProps }) {
 	const isAdmin = authAdminListener();
@@ -12,3 +12,7 @@ export function IsAdminRedirect({ ...restProps }) {
 	return isAdmin ? <Redirect to="/admin/browse" /> : <Route {...restProps} />;
 }
 
+export function IsUserRedirect({ ...restProps }) {
+	const isUser = authUserListener();
+	return isUser ? <Redirect to="/" /> : <Route {...restProps} />;
+}

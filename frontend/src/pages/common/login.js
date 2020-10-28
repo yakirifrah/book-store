@@ -3,37 +3,53 @@ import { Form } from '../../components';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
-export default function Login({ role, path }) {
-  const history = useHistory();
-  const [userName, setUserName] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const isInvalid = password === '' || userName === '';
+export default function Login({ role = 'user', path }) {
+	const history = useHistory();
+	const [userName, setUserName] = useState('');
+	const [password, setPassword] = useState('');
+	const [error, setError] = useState('');
+	const isInvalid = password === '' || userName === '';
 
-  const handleSignIn = async (event) => {
-    event.preventDefault();
-    try {
-      const res = await axios.post('http://localhost:3001/admin/api/v1/users/login', {
-        userName,
-        password,
-        role,
-      });
-      sessionStorage.setItem(
+	const handleSignIn = async (event) => {
+		event.preventDefault();
+		try {
+			const res = await axios.post(
+				'http://localhost:3001/admin/api/v1/users/login',
+				{
+					userName,
+					password,
+					role,
+				},
+			);
+			if (role === 'admin') {
+				sessionStorage.setItem(
+					'login',
+					JSON.stringify({
+						token: res.data.token,
+						user_id: res.data.user_id,
+						login: true,
+						role: role,
+					}),
+				);
+				return history.push('/admin/browse', 'admin');
+			}
+			localStorage.setItem(
 				'login',
 				JSON.stringify({
 					token: res.data.token,
-					user_id:res.data.user_id,
+					user_id: res.data.user_id,
 					login: true,
 					role: role,
 				}),
 			);
-      history.push('/admin/browse', 'admin');
-    } catch (error) {
-      setError(error.message);
-    }
-  };
 
-  return (
+			return history.push('/');
+		} catch (error) {
+			setError(error.message);
+		}
+	};
+
+	return (
 		<>
 			<Form>
 				<Form.Title>Sign In</Form.Title>
@@ -52,7 +68,10 @@ export default function Login({ role, path }) {
 						onChange={({ target }) => setPassword(target.value)}
 					/>
 					<Form.Text>
-						New Admin? <Form.Link to={`${path}/signup`}>Sign up now.</Form.Link>
+						New Admin?{' '}
+						<Form.Link to={path ? `${path}/signup` : '/signup'}>
+							Sign up now.
+						</Form.Link>
 					</Form.Text>
 					<Form.Submit disabled={isInvalid} type="submit">
 						Sign In

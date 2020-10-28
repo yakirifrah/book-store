@@ -1,6 +1,6 @@
 import React from 'react';
 import { CartProvider } from '../../context/cart';
-import { CartContainer } from '../../containers/cart';
+import { CartContainer } from '../../containers';
 import styled from 'styled-components/macro';
 export default function MyCart() {
 	return (
