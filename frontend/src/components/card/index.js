@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Title, SubTitle, Image, Item, Entities,Meta,Icon } from './styles/card';
+import { Container, Title, SubTitle, Image, Item, Entities, Meta, Icon } from './styles/card';
 
 export default function Card({ children, ...restProps }) {
   return <Container {...restProps}>{children}</Container>;
@@ -25,13 +25,10 @@ Card.Entities = function CardEntities({ children, ...restProps }) {
   return <Entities {...restProps}>{children}</Entities>;
 };
 
-
 Card.Icon = function CardIcon({ children, ...restProps }) {
   return <Icon {...restProps}>{children}</Icon>;
-}
-
+};
 
 Card.Meta = function CardMeta({ children, ...restProps }) {
   return <Meta {...restProps}>{children}</Meta>;
-}
-
+};

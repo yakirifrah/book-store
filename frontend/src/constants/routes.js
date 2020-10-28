@@ -11,4 +11,3 @@ export const BROWSE = '/browse';
 export const MY_CART = '/my-cart';
 
 export const MY_ORDER_HISTORY = '/my-orders';
-

@@ -8,24 +8,20 @@ import { Admin } from './pages/adminArea';
 import { MyCart, PurchaseHistory } from './pages/userArea';
 import { IsUserRedirect } from './helpers/routes';
 function App() {
-	return (
-		<BrowserRouter>
-			<Switch>
-				<Route path={ROUTES.ADMIN} component={Admin} />
-				<Route exact path={ROUTES.HOME} component={Browse} />
-				<Route exact path={ROUTES.MY_CART} component={MyCart} />
-				<Route
-					exact
-					path={ROUTES.MY_ORDER_HISTORY}
-					component={PurchaseHistory}
-				/>
-				<IsUserRedirect exact path={ROUTES.LOGIN} component={Login} />
-				<IsUserRedirect exact path={ROUTES.SIGNUP} component={Signup} />
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route path={ROUTES.ADMIN} component={Admin} />
+        <Route exact path={ROUTES.HOME} component={Browse} />
+        <Route exact path={ROUTES.MY_CART} component={MyCart} />
+        <Route exact path={ROUTES.MY_ORDER_HISTORY} component={PurchaseHistory} />
+        <IsUserRedirect exact path={ROUTES.LOGIN} component={Login} />
+        <IsUserRedirect exact path={ROUTES.SIGNUP} component={Signup} />
 
-				<Route path="*" component={NotFound} />
-			</Switch>
-		</BrowserRouter>
-	);
+        <Route path="*" component={NotFound} />
+      </Switch>
+    </BrowserRouter>
+  );
 }
 
 export default App;
