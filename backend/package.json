@@ -6,7 +6,11 @@
   "scripts": {
     "dev": "nodemon server.js",
     "start": "node server.js",
-    "debug": "ndb server.js"
+    "debug": "ndb server.js",
+    "install-client": "cd frontend && yarn install",
+    "heroku-postbuild": "yarn run install-client && yarn run bulid",
+    "build": "cd frontend && yarn build",
+    "client": "cd frontend && yarn start"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
