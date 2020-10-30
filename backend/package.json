@@ -7,8 +7,8 @@
     "dev": "nodemon server.js",
     "start": "node server.js",
     "debug": "ndb server.js",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false yarn run install-client && yarn run bulid",
     "install-client": "cd frontend && yarn install",
-    "heroku-postbuild": "yarn run install-client && yarn run bulid",
     "build": "cd frontend && yarn build",
     "client": "cd frontend && yarn start"
   },
