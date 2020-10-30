@@ -11,7 +11,7 @@
     "start": "node backend/server.js",
     "backend": "nodmon backend/server.js",
     "frontend": "yarn run front --prefix frontend",
-    "heroku-postbuild": "yarn install --prefix frontend && yarn run bulid --prefix frontend"
+    "heroku-postbuild": "yarn install --prefix frontend && yarn run build --prefix frontend"
 
   },
   "repository": "git@github.com:yakirifrah/book_store.git",
