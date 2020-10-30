@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -16,7 +19,14 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6dcc6955-fb18-4d5f-be1d-1d8605993181" name="Default Changelist" comment="" />
+    <list default="true" id="6dcc6955-fb18-4d5f-be1d-1d8605993181" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/yarn.lock" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -51,6 +61,11 @@
       <updated>1603873823848</updated>
       <workItem from="1603873824911" duration="1018000" />
       <workItem from="1603955396199" duration="624000" />
+      <workItem from="1603956064906" duration="710000" />
+      <workItem from="1603958979894" duration="1256000" />
+      <workItem from="1603994773247" duration="167000" />
+      <workItem from="1604056603494" duration="274000" />
+      <workItem from="1604056914822" duration="5842000" />
     </task>
     <task id="LOCAL‎00001" summary="update git repo">
       <created>1603874083298</created>
@@ -106,5 +121,13 @@
       <screen x="1920" y="0" width="1680" height="1010" />
     </state>
     <state x="2296" y="0" key="CommitChangelistDialog2/0.0.1536.824/1920.0.1680.1010@1920.0.1680.1010" timestamp="1603874850194" />
+    <state x="460" y="136" width="615" height="552" key="find.popup" timestamp="1604057235446">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="460" y="136" width="615" height="552" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1604057235446" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1604058931301">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1604058931301" />
   </component>
 </project>

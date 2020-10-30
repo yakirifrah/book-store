@@ -4,16 +4,14 @@
   "main": "index.js",
   "license": "MIT",
   "engines": {
-    "node": "12.18.0"
+    "node": "12.18.0",
+    "yarn": "1.6.0"
   },
   "scripts": {
-    "dev": "nodemon server.js",
+    "start:dev": "nodemon server.js",
     "start": "node server.js",
     "debug": "ndb server.js",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false yarn run install-client && yarn run bulid",
-    "install-client": "cd../frontend && yarn install",
-    "build": "cd../frontend && yarn build",
-    "client": "cd../frontend && yarn start"
+    "heroku-postbuild": "YARN_CONFIG_PRODUCTION=false yarn install --prefix frontend && yarn run bulid --prefix frontend"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
