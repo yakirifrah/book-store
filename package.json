@@ -1,8 +1,19 @@
 {
   "name": "bookshop",
   "version": "1.0.0",
-  "description": "Book shoop using a MERN stack",
+  "description": "Book shop using a MERN stack",
   "main": "index.js",
+  "engines": {
+    "node": "12.18.0",
+    "yarn": "1.6.0"
+  },
+  "scripts": {
+    "start": "node backend/server.js",
+    "backend": "nodmon backend/server.js",
+    "frontend": "yarn run front --prefix frontend",
+    "heroku-postbuild": "yarn install --prefix frontend && yarn run bulid --prefix frontend"
+
+  },
   "repository": "git@github.com:yakirifrah/book_store.git",
   "author": "yakir <yakirifrah19@gmail.com>",
   "license": "MIT"

@@ -19,7 +19,12 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6dcc6955-fb18-4d5f-be1d-1d8605993181" name="Default Changelist" comment="" />
+    <list default="true" id="6dcc6955-fb18-4d5f-be1d-1d8605993181" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -58,7 +63,7 @@
       <workItem from="1603958979894" duration="1256000" />
       <workItem from="1603994773247" duration="167000" />
       <workItem from="1604056603494" duration="274000" />
-      <workItem from="1604056914822" duration="6207000" />
+      <workItem from="1604056914822" duration="7195000" />
     </task>
     <task id="LOCAL‎00001" summary="update git repo">
       <created>1603874083298</created>
