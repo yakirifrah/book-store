@@ -1,0 +1,9 @@
+{
+  "name": "bookshop",
+  "version": "1.0.0",
+  "description": "Book shoop using a MERN stack",
+  "main": "index.js",
+  "repository": "git@github.com:yakirifrah/book_store.git",
+  "author": "yakir <yakirifrah19@gmail.com>",
+  "license": "MIT"
+}
