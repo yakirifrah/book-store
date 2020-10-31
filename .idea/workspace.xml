@@ -20,16 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6dcc6955-fb18-4d5f-be1d-1d8605993181" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/public/images/books/Learning JavaScript Design Patterns.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/images/books/Programming JavaScript Applications.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/images/books/default-placeholder-image-300x300.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/images/icons/add_to_cart.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/images/icons/delete.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/images/icons/search.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/public/images/misc/spinner.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +29,12 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
   </component>
   <component name="ProjectId" id="1jV0CS45Yesqkc0UofQXN0K278a" />
   <component name="ProjectViewState">
@@ -80,7 +77,7 @@
       <workItem from="1603994773247" duration="167000" />
       <workItem from="1604056603494" duration="274000" />
       <workItem from="1604056914822" duration="8847000" />
-      <workItem from="1604165881653" duration="7790000" />
+      <workItem from="1604165881653" duration="8762000" />
     </task>
     <task id="LOCAL‎00001" summary="update git repo">
       <created>1603874083298</created>
