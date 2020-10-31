@@ -28,8 +28,7 @@ if (process.env.NODE_ENV === 'production') {
 // ROUTES
 app.use('/api/v1/books', bookRoute);
 
-//ADMIN
-app.use('/admin/api/v1/users', userRoute);
+
 
 app.use('/api/v1/users', userRoute);
 

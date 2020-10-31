@@ -3,7 +3,6 @@ import { faShoppingCart, faHistory } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import Fuse from 'fuse.js';
 import { Card, Header, Modal, Loading } from '../components';
 import { EditBook } from '../pages/adminArea';
@@ -12,6 +11,7 @@ import { useLocation } from 'react-router-dom';
 import { CartConsumer } from '../context/cart';
 import * as ROUTES from '../constants/routes';
 import { addDefaultSrc } from '../utils';
+import API from '../api';
 export default function BrowseContainer() {
   // state
   const [books, setBooks] = useState([]);
@@ -35,7 +35,7 @@ export default function BrowseContainer() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await axios.get('http://localhost:3001/api/v1/books');
+        const res = await API.getBooks();
         const {
           data: { books },
         } = res.data;
@@ -185,7 +185,7 @@ export default function BrowseContainer() {
   const handleOk = async (event) => {
     try {
       const { token } = JSON.parse(sessionStorage.getItem('login'));
-      await axios.delete(`http://localhost:3001/api/v1/books/${itemRef.current}`, {
+      await API.deleteBook(itemRef.current, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
@@ -214,8 +214,8 @@ export default function BrowseContainer() {
     const { author, description, price, publisher, title } = newItem;
     const { _id } = newItem;
     try {
-      await axios.patch(
-        `http://localhost:3001/api/v1/books/${_id}`,
+      await API.updateBook(
+        _id,
         {
           author,
           description,
@@ -230,6 +230,7 @@ export default function BrowseContainer() {
           },
         },
       );
+
       setModalEditBook(false);
       setEditItem((prevState) => !prevState);
     } catch (error) {

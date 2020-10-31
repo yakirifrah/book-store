@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Form } from '../../components';
-import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { authAdminListener } from './../../utils';
+import API from '../../api';
 export default function AddBook() {
   const history = useHistory();
   const [author, setAuthor] = useState('');
@@ -17,8 +17,7 @@ export default function AddBook() {
     try {
       const { token } = authAdminListener();
 
-      await axios.post(
-        `http://localhost:3001/api/v1/books`,
+      await API.addBook(
         {
           author,
           description,

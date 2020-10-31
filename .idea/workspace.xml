@@ -20,7 +20,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6dcc6955-fb18-4d5f-be1d-1d8605993181" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/frontend/src/api/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/config.env" beforeDir="false" afterPath="$PROJECT_DIR$/backend/config.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/containers/browse.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/containers/browse.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/adminArea/addBook.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/adminArea/addBook.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/common/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/common/login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/common/signup.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/common/signup.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,9 +53,13 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.standard" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.standard" value="" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="settings.javascript.linters.eslint" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -61,7 +77,7 @@
       <workItem from="1603994773247" duration="167000" />
       <workItem from="1604056603494" duration="274000" />
       <workItem from="1604056914822" duration="8847000" />
-      <workItem from="1604165881653" duration="2010000" />
+      <workItem from="1604165881653" duration="6398000" />
     </task>
     <task id="LOCAL‎00001" summary="update git repo">
       <created>1603874083298</created>
@@ -113,6 +129,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="Create book store&#10;Panel admin:&#10;  1. login &amp; signup (JWT)&#10;  2. CRUD book (login as admin)&#10;  3. Search book&#10; Panel user:&#10;  1. search book&#10;  2. Purchase book (login as User JWT)&#10;  3. history purchased (login as User JWT)" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="608" y="291" key="#ESLint" timestamp="1604169462090">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="608" y="291" key="#ESLint/0.0.1536.824@0.0.1536.824" timestamp="1604169462090" />
     <state x="428" y="202" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1604167625358">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -125,10 +145,14 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="489" y="31" key="RollbackChangesDialog/0.0.1536.824@0.0.1536.824" timestamp="1604066450269" />
-    <state x="460" y="136" width="615" height="552" key="find.popup" timestamp="1604057235446">
+    <state x="300" y="57" key="SettingsEditor" timestamp="1604172391259">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="460" y="136" width="615" height="552" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1604057235446" />
+    <state x="300" y="57" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1604172391259" />
+    <state x="460" y="136" width="615" height="552" key="find.popup" timestamp="1604171673958">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="460" y="136" width="615" height="552" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1604171673958" />
     <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1604058931301">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

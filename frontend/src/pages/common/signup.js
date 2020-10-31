@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { Form } from '../../components';
-import axios from 'axios';
+import API from '../../api';
 import * as ROUTES from '../../constants/routes';
 
 export default function SignUp() {
@@ -16,10 +16,10 @@ export default function SignUp() {
     event.preventDefault();
 
     try {
-      await axios.post('http://localhost:3001/admin/api/v1/users/signup', {
+      await API.signUpUser({
         userName,
         password,
-        role: role,
+        role,
       });
     } catch (error) {
       setError(error.message);

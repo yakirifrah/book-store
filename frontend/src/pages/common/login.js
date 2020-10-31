@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Form } from '../../components';
-import axios from 'axios';
+import API from '../../api';
 import { useHistory } from 'react-router-dom';
 
 export default function Login({ role = 'user', path }) {
@@ -13,7 +13,7 @@ export default function Login({ role = 'user', path }) {
   const handleSignIn = async (event) => {
     event.preventDefault();
     try {
-      const res = await axios.post('http://localhost:3001/admin/api/v1/users/login', {
+      const res = await API.signInUser({
         userName,
         password,
         role,
