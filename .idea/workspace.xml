@@ -20,7 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6dcc6955-fb18-4d5f-be1d-1d8605993181" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +78,7 @@
       <workItem from="1603994773247" duration="167000" />
       <workItem from="1604056603494" duration="274000" />
       <workItem from="1604056914822" duration="8847000" />
-      <workItem from="1604165881653" duration="9427000" />
+      <workItem from="1604165881653" duration="10057000" />
     </task>
     <task id="LOCAL‎00001" summary="update git repo">
       <created>1603874083298</created>
