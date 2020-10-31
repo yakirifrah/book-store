@@ -11,7 +11,7 @@
     "start": "node backend/server.js",
     "backend": "nodemon backend/server.js",
     "frontend": "npm run front --prefix frontend",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install npm && run build"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false cd frontend && npm install && npm run build"
   },
   "repository": "git@github.com:yakirifrah/book_store.git",
   "author": "yakir <yakirifrah19@gmail.com>",
