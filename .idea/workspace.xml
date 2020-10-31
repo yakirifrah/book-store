@@ -20,19 +20,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6dcc6955-fb18-4d5f-be1d-1d8605993181" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/frontend/src/api/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/images/books/Learning JavaScript Design Patterns.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/images/books/Programming JavaScript Applications.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/images/books/default-placeholder-image-300x300.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/images/icons/add_to_cart.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/images/icons/delete.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/images/icons/search.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/public/images/misc/spinner.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/config.env" beforeDir="false" afterPath="$PROJECT_DIR$/backend/config.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/server.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/containers/browse.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/containers/browse.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/adminArea/addBook.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/adminArea/addBook.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/common/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/common/login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/common/signup.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/common/signup.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,6 +49,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/backend/public" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -61,6 +59,11 @@
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="settings.javascript.linters.eslint" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Projects\full stack\CodeOasis\bookshop\backend\public" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -77,7 +80,7 @@
       <workItem from="1603994773247" duration="167000" />
       <workItem from="1604056603494" duration="274000" />
       <workItem from="1604056914822" duration="8847000" />
-      <workItem from="1604165881653" duration="6398000" />
+      <workItem from="1604165881653" duration="7790000" />
     </task>
     <task id="LOCAL‎00001" summary="update git repo">
       <created>1603874083298</created>
