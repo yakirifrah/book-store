@@ -1,8 +1,8 @@
 import React, { createContext } from 'react';
 import { UseLocalStorage } from './../hooks';
-const CartContext = createContext();
+const StoreContext = createContext();
 
-const CartProvider = ({ children }) => {
+const StoreProvider = ({ children }) => {
   const [cart, setCart] = UseLocalStorage('cart', []);
   const [historyPurchase, setHistoryPurchase] = UseLocalStorage('history', {});
   const addToHistoryPurchase = (_id) => {
@@ -54,7 +54,7 @@ const CartProvider = ({ children }) => {
   };
 
   return (
-    <CartContext.Provider
+    <StoreContext.Provider
       value={{
         cart,
         historyPurchase,
@@ -67,9 +67,9 @@ const CartProvider = ({ children }) => {
       }}
     >
       {children}
-    </CartContext.Provider>
+    </StoreContext.Provider>
   );
 };
-const CartConsumer = CartContext.Consumer;
+const StoreConsumer = StoreContext.Consumer;
 
-export { CartConsumer, CartProvider };
+export { StoreConsumer, StoreProvider, StoreContext };

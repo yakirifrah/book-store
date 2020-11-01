@@ -3,11 +3,13 @@ import styled, { css } from 'styled-components/macro';
 export const Container = styled.div`
   margin-left: 100px;
   margin-right: 100px;
-  margin-top: 100px;
+  margin-top: 51px;
+  padding: 4em;
 `;
 
 export const Title = styled.figcaption`
   font-size: 18px;
+  font-family: 'Merriweather', 'Georgia', serif;
   max-width: 300px;
   color: white;
   font-weight: bold;
@@ -17,6 +19,8 @@ export const SubTitle = styled.h4`
   font-size: 12px;
   color: white;
   font-weight: bold;
+  font-style: italic;
+  font-family: 'Merriweather', 'Georgia', serif;
 `;
 
 export const Image = styled.img`
@@ -90,6 +94,9 @@ export const Entities = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 20px;
+  @media (max-width: 1300px) {
+    grid-template-columns: 1fr 1fr;
+  }
 `;
 
 export const Meta = styled.figure`

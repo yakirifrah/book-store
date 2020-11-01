@@ -49,7 +49,8 @@ export const Icon = styled.button`
 
 export const Item = styled.div`
   border: 2px solid #cccc;
-  margin-bottom: 2rem;
+  max-height: 135px;
+  margin-bottom: 1rem;
   background-color: black;
   padding: 9px;
   display: flex;

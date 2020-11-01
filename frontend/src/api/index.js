@@ -17,11 +17,12 @@ export default {
   },
   //Update Book
   updateBook: (id, data = {}, config = {}) => {
-    return axios.patch(`api/v1/books/${id}`, { ...data }, { ...config });
+    console.log(data);
+    return axios.patch(`/api/v1/books/${id}`, { ...data }, { ...config });
   },
 
   signInUser: (data = {}) => {
-    return axios.post(`api/v1/users/login`, {
+    return axios.post(`/api/v1/users/login`, {
       ...data,
     });
   },

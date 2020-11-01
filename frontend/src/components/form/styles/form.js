@@ -5,15 +5,32 @@ import { Link as ReachRouterLink } from 'react-router-dom';
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: 660px;
   background-color: rgba(0, 0, 0, 0.75);
   border-radius: 5px;
   box-sizing: border-box;
   width: 100%;
   margin: auto;
+  ${(props) =>
+    props.addBook &&
+    css`
+      margin-top: 2em;
+    `}
+  ${(props) =>
+    props.login &&
+    css`
+      position: absolute;
+      top: 2em;
+      right: 35em;
+    `}
   max-width: 450px;
   padding: 60px 68px 40px;
   margin-bottom: 100px;
+  ${(props) =>
+    props.modalLogin &&
+    css`
+      position: inherit;
+      margin-bottom: 0;
+    `}
 `;
 
 export const Error = styled.div`
@@ -34,7 +51,7 @@ export const Base = styled.form`
 
 export const Label = styled.label`
   display: grid;
-  grid-template-columns: 1fr 5fr;
+  grid-template-columns: 1fr 3fr;
   ${(props) =>
     props.addBook &&
     css`
@@ -58,13 +75,6 @@ export const Text = styled.p`
   color: #737373;
   font-size: 16px;
   font-weight: 500;
-`;
-
-export const TextSmall = styled.p`
-  margin-top: 10px;
-  font-size: 13px;
-  line-height: normal;
-  color: #8c8c8c;
 `;
 
 export const Input = styled.input`

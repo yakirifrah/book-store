@@ -3,7 +3,7 @@ import { Form } from '../../components';
 import API from '../../api';
 import { useHistory } from 'react-router-dom';
 
-export default function Login({ role = 'user', path }) {
+export default function Login({ role = 'user', path, modalLogin = 'false' }) {
   const history = useHistory();
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
@@ -45,10 +45,9 @@ export default function Login({ role = 'user', path }) {
       setError(error.message);
     }
   };
-
   return (
     <>
-      <Form>
+      <Form modalLogin={modalLogin && modalLogin} login={!modalLogin}>
         <Form.Title>Sign In</Form.Title>
         {error && <Form.Error>{error}</Form.Error>}
         <Form.Base onSubmit={handleSignIn}>

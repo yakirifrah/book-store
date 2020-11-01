@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useContext } from 'react';
 import { faShoppingCart, faHistory } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -8,7 +8,7 @@ import { Card, Header, Modal, Loading } from '../components';
 import { EditBook } from '../pages/adminArea';
 import { authAdminListener, signOutAdmin } from '../utils';
 import { useLocation } from 'react-router-dom';
-import { CartConsumer } from '../context/cart';
+import { StoreContext } from '../context/store';
 import * as ROUTES from '../constants/routes';
 import { addDefaultSrc } from '../utils';
 import API from '../api';
@@ -24,7 +24,9 @@ export default function BrowseContainer() {
   const [editItem, setEditItem] = useState(false);
   const [modalEditBook, setModalEditBook] = useState(false);
   const itemRef = useRef('');
+  const { addToCart, sumQuantity } = useContext(StoreContext);
   const location = useLocation();
+
   if (location.pathname === '/') {
     signOutAdmin();
   }
@@ -81,100 +83,97 @@ export default function BrowseContainer() {
       />
       <Card>
         <Card.Entities>
-          {books.map((item) => (
-            <Card.Item key={item._id} item={item}>
-              <Card.Meta>
-                <Card.Image
-                  alt="book"
-                  src={`/images/books/${item.title}.jpg`}
-                  onError={(e) => addDefaultSrc(e)}
-                  onClick={() => handleEditItem(item)}
-                  editBook
-                />
-                {commonArea(item)}
-              </Card.Meta>
-              <Card.Icon onClick={() => handleOnClick(item._id)}>
-                <img src="/images/icons/delete.png" alt="Delete" />
-              </Card.Icon>
-            </Card.Item>
-          ))}
+          {books.map((item) => {
+            const { _id, title, imageURL } = item;
+            return (
+              <Card.Item key={_id} item={item}>
+                <Card.Meta>
+                  <Card.Image
+                    alt={title}
+                    src={imageURL}
+                    onError={(e) => addDefaultSrc(e)}
+                    onClick={() => handleEditItem(item)}
+                    editBook
+                  />
+                  {commonArea(item)}
+                </Card.Meta>
+                <Card.Icon onClick={() => handleOnClick(_id)}>
+                  <img src="/images/icons/delete.png" alt="Delete" />
+                </Card.Icon>
+              </Card.Item>
+            );
+          })}
         </Card.Entities>
       </Card>
     </>
   );
-  const commonArea = (item) => (
-    <>
-      <Card.Title>{item.title}</Card.Title>
-      <Card.Title>{item.price}&#8362;</Card.Title>
-      <div className="book__details">
-        {' '}
-        <h4>Summery:</h4>
-        <hr />
-        <Card.SubTitle>{item.description}</Card.SubTitle>
-        <h5>Publisher: {item.publisher}</h5>
-        <h5>Author: {item.author}</h5>
-      </div>
-    </>
-  );
+  const commonArea = (item) => {
+    const { title, price, description, publisher, author } = item;
+    return (
+      <>
+        <Card.Title>{title}</Card.Title>
+        <Card.SubTitle>By{author?.fullName}</Card.SubTitle>
+        <div className="book__details">
+          {' '}
+          <hr />
+          <Card.SubTitle>{description}</Card.SubTitle>
+          <h5>Publisher: {publisher?.publisherName}</h5>
+          <Card.Title>{price}&#8362;</Card.Title>
+        </div>
+      </>
+    );
+  };
 
   const userArea = () => (
-    <CartConsumer>
-      {(value) => (
-        <>
-          <div
-            style={{
-              zIndex: '115',
-              boxShadow: '0 5px 20px rgba(0,0,0,0.25)',
-            }}
-          >
-            <Header>
-              <Header.Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-              <div className="wrapper__icon__user">
-                <Header.Icon to={ROUTES.MY_ORDER_HISTORY}>
-                  <FontAwesomeIcon icon={faHistory} color="white" size="lg" title="order history" />
-                </Header.Icon>
-                <Header.Icon to={ROUTES.MY_CART}>
-                  <FontAwesomeIcon
-                    icon={faShoppingCart}
-                    color="white"
-                    size="lg"
-                    title="shooing cart"
-                  />
-                  {value.sumQuantity() > 0 && (
-                    <Header.NumOfItems>{value.sumQuantity()}</Header.NumOfItems>
-                  )}
-                </Header.Icon>
-              </div>
-            </Header>
+    <>
+      <div
+        style={{
+          zIndex: '115',
+          boxShadow: '0 5px 20px rgba(0,0,0,0.25)',
+        }}
+      >
+        <Header>
+          <Header.Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+          <div className="wrapper__icon__user">
+            <Header.Icon to={ROUTES.MY_ORDER_HISTORY}>
+              <FontAwesomeIcon icon={faHistory} color="white" size="lg" title="order history" />
+            </Header.Icon>
+            <Header.Icon to={ROUTES.MY_CART}>
+              <FontAwesomeIcon icon={faShoppingCart} color="white" size="lg" title="shooing cart" />
+              {sumQuantity() > 0 && <Header.NumOfItems>{sumQuantity()}</Header.NumOfItems>}
+            </Header.Icon>
           </div>
-          <Card>
-            <Card.Entities>
-              {books.map((item) => (
-                <Card.Item key={item._id} item={item}>
-                  <Card.Meta>
-                    <Card.Image
-                      alt="book"
-                      src={`/images/books/${item.title}.jpg`}
-                      onError={(e) => addDefaultSrc(e)}
-                      onClick={() => handleEditItem(item)}
-                    />
-                    {commonArea(item)}
-                  </Card.Meta>
-                  <Card.Icon onClick={() => handleOnClick(item._id)}>
-                    <img
-                      src="/images/icons/add_to_cart.png"
-                      alt="add_to_cart"
-                      style={{ fontSize: '16px' }}
-                      onClick={() => value.addToCart(item)}
-                    />
-                  </Card.Icon>
-                </Card.Item>
-              ))}
-            </Card.Entities>
-          </Card>
-        </>
-      )}
-    </CartConsumer>
+        </Header>
+      </div>
+      <Card>
+        <Card.Entities>
+          {books.map((item) => {
+            const { _id, imageURL, title } = item;
+            return (
+              <Card.Item key={item._id} item={item}>
+                <Card.Meta>
+                  <Card.Image
+                    alt={title}
+                    src={imageURL}
+                    onError={(e) => addDefaultSrc(e)}
+                    onClick={() => handleEditItem(item)}
+                  />
+                  {commonArea(item)}
+                </Card.Meta>
+                <Card.Icon onClick={() => handleOnClick(_id)}>
+                  <img
+                    src="/images/icons/add_to_cart.png"
+                    alt="add_to_cart"
+                    style={{ fontSize: '16px' }}
+                    onClick={() => addToCart(item)}
+                  />
+                </Card.Icon>
+              </Card.Item>
+            );
+          })}
+        </Card.Entities>
+      </Card>
+    </>
   );
 
   const handleOnClick = (id) => {
@@ -213,6 +212,7 @@ export default function BrowseContainer() {
     const { token } = JSON.parse(sessionStorage.getItem('login'));
     const { author, description, price, publisher, title } = newItem;
     const { _id } = newItem;
+    console.log({ newItem });
     try {
       await API.updateBook(
         _id,

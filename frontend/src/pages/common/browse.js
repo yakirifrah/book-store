@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowseContainer } from '../../containers';
-import { CartProvider } from '../../context/cart';
+import { StoreProvider } from '../../context/store';
 
 export default function Browse() {
   return (
-    <CartProvider>
+    <StoreProvider>
       <BrowseContainer />
-    </CartProvider>
+    </StoreProvider>
   );
 }

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Cart } from '../components';
-import { CartConsumer } from '../context/cart';
+import { StoreContext } from '../context/store';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -13,6 +13,7 @@ import styled from 'styled-components/macro';
 import { addDefaultSrc } from '../utils';
 export default function CartContainer() {
   const history = useHistory();
+  const { cart, deleteItem, totalPurchaseToPay, addToHistoryPurchase } = useContext(StoreContext);
   const [showModalLogin, setShowModalLogin] = useState(false);
   const [showModalOrder, setShowModalOrder] = useState(false);
   const handleOnClickBtnPay = (event) => {
@@ -22,108 +23,102 @@ export default function CartContainer() {
     return setShowModalOrder(true);
   };
 
-  const handelOnOKConfirmOrder = (event, cb) => {
+  const handleOnOKConfirmOrder = (event, cb) => {
     const userId = authUserListener().user_id;
     cb(userId);
     return history.goBack();
   };
   return (
-    <CartConsumer>
-      {(value) => (
-        <>
-          <Cart>
-            <Cart.Entities>
-              {value.cart.map((item) => (
-                <Cart.Item key={item._id}>
-                  <Cart.Meta>
-                    <Cart.Image
-                      src={`/images/books/${item.title}.jpg`}
-                      onError={(e) => addDefaultSrc(e)}
-                    />
-                    <div
-                      style={{
-                        marginLeft: '15px',
-                        textAlign: 'left',
-                        color: 'white',
-                      }}
-                    >
-                      <Cart.Title>{item.title}</Cart.Title>
-                      <h3
-                        style={{
-                          color: 'white',
-                        }}
-                      >
-                        {item.price}&#8362;
-                      </h3>
-                    </div>
-                  </Cart.Meta>
-
-                  <div className="wrapper">
-                    <div className="trash__icon">
-                      <FontAwesomeIcon
-                        onClick={() => value.deleteItem(item._id)}
-                        icon={faTrashAlt}
-                        color="white"
-                        size="lg"
-                      />
-                    </div>
-
+    <>
+      <Cart>
+        <Cart.Entities>
+          {cart.map((item) => {
+            const { _id, imageURL, title, price } = item;
+            return (
+              <Cart.Item key={_id}>
+                <Cart.Meta>
+                  <Cart.Image alt={{ title }} src={imageURL} onError={(e) => addDefaultSrc(e)} />
+                  <div
+                    style={{
+                      marginLeft: '15px',
+                      textAlign: 'left',
+                      color: 'white',
+                    }}
+                  >
+                    <Cart.Title>{title}</Cart.Title>
                     <h3
                       style={{
                         color: 'white',
-                        display: 'list-item',
-                        listStyle: 'none',
                       }}
                     >
-                      Quantity:{item?.quantity}{' '}
+                      {price}&#8362;
                     </h3>
                   </div>
-                </Cart.Item>
-              ))}
-            </Cart.Entities>
-            {value?.cart.length && (
-              <Footer>
-                <div className="final-payment">
-                  <h3 className="final-payment__title">Final payment:</h3>
-                  <h3 className="final-payment__title">&#8362;{value.totalPurchaseToPay()}</h3>
+                </Cart.Meta>
+                <div className="wrapper">
+                  <div className="trash__icon">
+                    <FontAwesomeIcon
+                      onClick={() => deleteItem(item._id)}
+                      icon={faTrashAlt}
+                      color="white"
+                      size="lg"
+                    />
+                  </div>
+                  <h3
+                    style={{
+                      color: 'white',
+                      display: 'list-item',
+                      listStyle: 'none',
+                    }}
+                  >
+                    Quantity:{item?.quantity}{' '}
+                  </h3>
                 </div>
-                <hr />
-                <Button
-                  type="primary"
-                  size="large"
-                  className="complete_order_payment"
-                  onClick={handleOnClickBtnPay}
-                >
-                  Completion of order and payment
-                </Button>
-                <Modal
-                  title="login"
-                  visible={showModalLogin}
-                  onCancel={() => setShowModalLogin(false)}
-                  bodyStyle={{
-                    backgroundColor: '#333333',
-                    height: 'fit-content',
-                  }}
-                  cancelButtonProps={{ style: { display: 'none' } }}
-                  okButtonProps={{ style: { display: 'none' } }}
-                  login
-                >
-                  <Login />
-                </Modal>
-                <Modal
-                  title="The order"
-                  visible={showModalOrder}
-                  onCancel={() => setShowModalOrder(false)}
-                  onOk={(event) => handelOnOKConfirmOrder(event, value.addToHistoryPurchase)}
-                >
-                  <h3>Click Okay to confirm the order</h3>
-                </Modal>
-              </Footer>
-            )}
-          </Cart>
-        </>
-      )}
-    </CartConsumer>
+              </Cart.Item>
+            );
+          })}
+        </Cart.Entities>
+        {cart?.length && (
+          <Footer>
+            <div className="final-payment">
+              <h3 className="final-payment__title">Final payment:</h3>
+              <h3 className="final-payment__title">&#8362;{totalPurchaseToPay()}</h3>
+            </div>
+            <hr />
+            <Button
+              type="primary"
+              size="large"
+              className="complete_order_payment"
+              onClick={handleOnClickBtnPay}
+            >
+              Completion of order and payment
+            </Button>
+            <Modal
+              title="login"
+              visible={showModalLogin}
+              onCancel={() => setShowModalLogin(false)}
+              bodyStyle={{
+                backgroundColor: '#333333',
+                height: 'fit-content',
+              }}
+              cancelButtonProps={{ style: { display: 'none' } }}
+              okButtonProps={{ style: { display: 'none' } }}
+              login
+            >
+              <Login modalLogin={true} />
+            </Modal>
+            <Modal
+              title="The order"
+              visible={showModalOrder}
+              onCancel={() => setShowModalOrder(false)}
+              onOk={(event) => handleOnOKConfirmOrder(event, addToHistoryPurchase)}
+            >
+              <h3>Click Okay to confirm the order</h3>
+            </Modal>
+          </Footer>
+        )}
+      </Cart>
+    </>
   );
 }
 
@@ -137,9 +132,9 @@ const Footer = styled.div`
       color: white;
     }
   }
-
   .complete_order_payment {
     border-radius: 1em;
     margin-top: 3em;
+    margin-bottom: 3em;
   }
 `;

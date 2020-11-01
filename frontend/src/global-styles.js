@@ -8,4 +8,17 @@ export const GlobalStyles = createGlobalStyle`
   background-color: #333333;
   color: #333333;
   font-size: 16px;
+  width: 100%;
+  height: 100%;
+     .ant-modal-wrap{
+      overflow: inherit;
+      .ant-modal{
+        top:2em;
+      }
+    }
+  #root{
+    width: 100%;
+    height: 100%;
+ 
+  }
 }`;

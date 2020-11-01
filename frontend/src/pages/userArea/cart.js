@@ -1,5 +1,5 @@
 import React from 'react';
-import { CartProvider } from '../../context/cart';
+import { StoreProvider } from '../../context/store';
 import { CartContainer } from '../../containers';
 import styled from 'styled-components/macro';
 export default function MyCart() {
@@ -8,16 +8,16 @@ export default function MyCart() {
       <NavBar>
         <h1 style={{ color: 'white' }}>My cart</h1>
       </NavBar>
-      <CartProvider>
+      <StoreProvider>
         <CartContainer />
-      </CartProvider>
+      </StoreProvider>
     </Wrapper>
   );
 }
 
 const NavBar = styled.div`
-  position: fixed;
-  top: 30px;
+  position: absolute;
+  top: 13px;
   right: 25%;
   left: 25%;
   text-align: center;

@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
 import { Form } from '../../components';
 import { useHistory } from 'react-router-dom';
-import { authAdminListener } from './../../utils';
+import { authAdminListener } from '../../utils';
 import API from '../../api';
 export default function AddBook() {
   const history = useHistory();
-  const [author, setAuthor] = useState('');
+  const [author, setAuthor] = useState({});
+  const [imageURL, setImageURL] = useState('');
   const [price, setPrice] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [publisher, setPublisher] = useState('');
+  const [publisher, setPublisher] = useState({});
   const [error, setError] = useState('');
   const isInvalid =
-    author === '' || price === '' || title === '' || description === '' || publisher === '';
+    author?.fullName === '' ||
+    price === '' ||
+    title === '' ||
+    description === '' ||
+    publisher?.publisherName === '';
   const handleAddBook = async () => {
     try {
       const { token } = authAdminListener();
@@ -40,7 +45,7 @@ export default function AddBook() {
 
   return (
     <>
-      <Form>
+      <Form addBook>
         <Form.Title>Add Book</Form.Title>
         {error && <Form.Error>{error}</Form.Error>}
         <Form.Base onSubmit={handleAddBook}>
@@ -56,16 +61,16 @@ export default function AddBook() {
             <h3>Publisher:</h3>
             <Form.Input
               placeholder="publisher"
-              value={publisher}
-              onChange={({ target }) => setPublisher(target.value)}
+              value={publisher.publisherName || ''}
+              onChange={({ target }) => setPublisher({ publisherName: target.value })}
             />
           </Form.Label>
           <Form.Label addBook>
             <h3>Author:</h3>
             <Form.Input
               placeholder="author"
-              value={author}
-              onChange={({ target }) => setAuthor(target.value)}
+              value={author.fullName || ''}
+              onChange={({ target }) => setAuthor({ fullName: target.value })}
             />
           </Form.Label>
           <Form.Label addBook>
@@ -78,7 +83,15 @@ export default function AddBook() {
             />
           </Form.Label>
           <Form.Label addBook>
-            <h3>Description:</h3>
+            <h3>Image URL:</h3>
+            <Form.Input
+              placeholder="image URL"
+              value={imageURL}
+              onChange={({ target }) => setImageURL(target.value)}
+            />
+          </Form.Label>
+          <Form.Label addBook>
+            <h3>Summery:</h3>
             <Form.TextArea
               value={description}
               placeholder="Book description"

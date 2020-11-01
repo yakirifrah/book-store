@@ -1,6 +1,6 @@
 import React from 'react';
 import { PurchaseHistoryContainer } from '../../containers';
-import { CartProvider } from '../../context/cart';
+import { StoreProvider } from '../../context/store';
 import styled from 'styled-components/macro';
 
 export default function PurchaseHistory() {
@@ -9,9 +9,9 @@ export default function PurchaseHistory() {
       <NavBar>
         <h1 style={{ color: 'white' }}>My history order</h1>
       </NavBar>
-      <CartProvider>
+      <StoreProvider>
         <PurchaseHistoryContainer />
-      </CartProvider>
+      </StoreProvider>
     </Wrapper>
   );
 }

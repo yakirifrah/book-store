@@ -4,12 +4,16 @@ import { Button } from 'antd';
 
 export default function EditBook({ children, ...restProps }) {
   const { modalEditBook, handleCancel, item, handleUpdateItem } = restProps;
-  const { _id } = item;
   const myItemFromProp = item;
   const changeInput = useRef(true);
   const [myItem, setMyItem] = useState(myItemFromProp);
+  const { title, description, author, price, publisher, imageURL } = myItem;
   const isInvalid =
-    myItem.title === '' || myItem.description === '' || myItem.author === '' || myItem.price === '';
+    title === '' ||
+    description === '' ||
+    author?.fullName === '' ||
+    price === '' ||
+    publisher?.publisherName === '';
   useEffect(() => {
     setMyItem(item);
   }, [item]);
@@ -40,7 +44,7 @@ export default function EditBook({ children, ...restProps }) {
             <h3>Title:</h3>
             <Form.Input
               placeholder="title"
-              value={myItem.title}
+              value={title}
               onChange={({ target }) => {
                 changeInput.current = false;
                 setMyItem((prevState) => ({ ...prevState, title: target.value }));
@@ -52,10 +56,40 @@ export default function EditBook({ children, ...restProps }) {
             <h3>Author:</h3>
             <Form.Input
               placeholder="author"
-              value={myItem.author}
+              value={author?.fullName}
               onChange={({ target }) => {
                 changeInput.current = false;
-                setMyItem((prevState) => ({ ...prevState, author: target.value }));
+                let newAuthor = {
+                  fullName: target.value,
+                };
+                setMyItem((prevState) => ({ ...prevState, newAuthor }));
+              }}
+              editForm
+            />
+          </Form.Label>
+          <Form.Label>
+            <h3>Publisher:</h3>
+            <Form.Input
+              placeholder="publisher"
+              value={publisher?.publisherName}
+              onChange={({ target }) => {
+                changeInput.current = false;
+                let newPublisher = {
+                  publisherName: target.value,
+                };
+                setMyItem((prevState) => ({ ...prevState, newPublisher }));
+              }}
+              editForm
+            />
+          </Form.Label>
+          <Form.Label>
+            <h3>imageURL:</h3>
+            <Form.Input
+              placeholder="imageURL"
+              value={imageURL}
+              onChange={({ target }) => {
+                changeInput.current = false;
+                setMyItem((prevState) => ({ ...prevState, imageURL: target.imageURL }));
               }}
               editForm
             />
@@ -64,7 +98,7 @@ export default function EditBook({ children, ...restProps }) {
             <h3>Price:</h3>
             <Form.Input
               placeholder="price"
-              value={myItem.price}
+              value={price}
               type="number"
               onChange={({ target }) => {
                 changeInput.current = false;
@@ -74,10 +108,10 @@ export default function EditBook({ children, ...restProps }) {
             />
           </Form.Label>
           <Form.Label>
-            <h3>decs:</h3>
+            <h3>summery:</h3>
             <Form.TextArea
               placeholder="description"
-              value={myItem.description}
+              value={description}
               type="text"
               onChange={({ target }) => {
                 changeInput.current = false;
