@@ -1,21 +1,17 @@
 import React, { useEffect, useState, useRef, useContext } from 'react';
+import { Link,useLocation } from 'react-router-dom';
 import { faShoppingCart, faHistory } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-import { Link } from 'react-router-dom';
 import Fuse from 'fuse.js';
-import { Card, Header, Modal, Loading, Burger, Menu } from '../components';
-import { EditBook } from '../pages/adminArea';
-import { authAdminListener, signOutAdmin } from '../utils';
-import { useLocation } from 'react-router-dom';
+import FocusLock from 'react-focus-lock';
+import { authAdminListener, signOutAdmin,addDefaultSrc } from '../utils';
 import { StoreContext } from '../context/store';
 import * as ROUTES from '../constants/routes';
-import { addDefaultSrc } from '../utils';
-import styled from 'styled-components/macro';
-import API from '../api';
-
-import FocusLock from 'react-focus-lock';
 import { useOnClickOutSide } from '../hooks';
+import { Card, Header, Modal, Loading, Burger, Menu } from '../components';
+import { EditBook } from '../pages/adminArea';
+import API from '../api';
+import styled from 'styled-components/macro';
 
 export default function BrowseContainer() {
   // state
@@ -71,7 +67,7 @@ export default function BrowseContainer() {
     }
   }, [searchTerm]);
 
-  const adminArea = () => (
+  const renderAdminArea = () => (
     <>
       <HeaderWrapper>
         <Header>
@@ -106,7 +102,7 @@ export default function BrowseContainer() {
                     onClick={() => handleEditItem(item)}
                     editBook
                   />
-                  {commonArea(item)}
+                  {renderCommonArea(item)}
                 </Card.Meta>
                 <Card.Icon onClick={() => handleOnClick(_id)}>
                   <img src="/images/icons/delete.png" alt="Delete" />
@@ -118,7 +114,7 @@ export default function BrowseContainer() {
       </Card>
     </>
   );
-  const commonArea = (item) => {
+  const renderCommonArea = (item) => {
     const { title, price, description, publisher, author } = item;
     return (
       <>
@@ -135,7 +131,7 @@ export default function BrowseContainer() {
     );
   };
 
-  const userArea = () => (
+  const renderUserArea = () => (
     <>
       <HeaderWrapper>
         <Header>
@@ -170,7 +166,7 @@ export default function BrowseContainer() {
                     onError={(e) => addDefaultSrc(e)}
                     onClick={() => handleEditItem(item)}
                   />
-                  {commonArea(item)}
+                  {renderCommonArea(item)}
                 </Card.Meta>
                 <Card.Icon onClick={() => handleOnClick(_id)}>
                   <img
@@ -264,7 +260,7 @@ export default function BrowseContainer() {
           ) : (
             <>
               <Loading.ReleaseBody />
-              {isAdmin ? adminArea() : userArea()}
+              {isAdmin ? renderAdminArea() : renderUserArea()}
             </>
           )}
         </>

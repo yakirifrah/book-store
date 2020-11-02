@@ -29,7 +29,7 @@ export default function SignUp() {
 
   return (
     <>
-      <Form>
+      <Form signUp>
         <Form.Title>Sign Up</Form.Title>
         {error && <Form.Error>{error}</Form.Error>}
 

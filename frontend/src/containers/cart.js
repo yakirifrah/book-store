@@ -1,16 +1,15 @@
 import React, { useState, useContext } from 'react';
-import { Cart } from '../components';
-import { StoreContext } from '../context/store';
+import { useHistory } from 'react-router-dom';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import { Button } from 'antd';
-import { useHistory } from 'react-router-dom';
 import { authUserListener } from '../utils';
-import { Modal } from '../components';
+import { Modal,Cart } from '../components';
 import { Login } from '../pages/common';
-import styled from 'styled-components/macro';
+import { StoreContext } from '../context/store';
 import { addDefaultSrc } from '../utils';
+import styled from 'styled-components/macro';
+
 export default function CartContainer() {
   const history = useHistory();
   const { cart, deleteItem, totalPurchaseToPay, addToHistoryPurchase } = useContext(StoreContext);

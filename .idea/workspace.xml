@@ -20,7 +20,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6dcc6955-fb18-4d5f-be1d-1d8605993181" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/cart/styles/cart.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/cart/styles/cart.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/form/styles/form.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/form/styles/form.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/containers/admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/containers/admin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/containers/browse.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/containers/browse.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/containers/cart.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/containers/cart.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/containers/purchaseHistory.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/containers/purchaseHistory.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/adminArea/addBook.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/adminArea/addBook.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/adminArea/editBook.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/adminArea/editBook.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/common/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/common/login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/common/signup.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/common/signup.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/pages/userArea/cart.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/userArea/cart.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -83,7 +94,7 @@
       <workItem from="1604056914822" duration="8847000" />
       <workItem from="1604165881653" duration="11403000" />
       <workItem from="1604179483911" duration="661000" />
-      <workItem from="1604242047658" duration="41479000" />
+      <workItem from="1604242047658" duration="43023000" />
     </task>
     <task id="LOCAL‎00001" summary="update git repo">
       <created>1603874083298</created>

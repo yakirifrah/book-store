@@ -16,12 +16,15 @@ export const Container = styled.div`
       margin-top: 2em;
     `}
   ${(props) =>
-    props.login &&
+    props.login || props.signUp ?
     css`
       position: absolute;
       top: 10em;
       right: 35em;
-    `}
+      `
+    :
+    ''
+    }
   max-width: 450px;
   padding: 60px 68px 40px;
   margin-bottom: 100px;

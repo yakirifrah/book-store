@@ -2,6 +2,7 @@ import React from 'react';
 import { StoreProvider } from '../../context/store';
 import { CartContainer } from '../../containers';
 import styled from 'styled-components/macro';
+
 export default function MyCart() {
   return (
     <Wrapper>

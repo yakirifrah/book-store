@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Form } from '../../components';
-import API from '../../api';
 import { useHistory } from 'react-router-dom';
+import API from '../../api';
 
 export default function Login({ role = 'user', path, modalLogin = false }) {
   const history = useHistory();

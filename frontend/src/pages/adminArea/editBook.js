@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Modal, Form } from '../../components';
-import { Button } from 'antd';
 
 export default function EditBook({ children, ...restProps }) {
   const { modalEditBook, handleCancel, item, handleUpdateItem, error } = restProps;
