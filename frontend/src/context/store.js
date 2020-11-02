@@ -1,10 +1,10 @@
 import React, { createContext } from 'react';
-import { UseLocalStorage } from './../hooks';
+import { useLocalStorage } from './../hooks';
 const StoreContext = createContext();
 
 const StoreProvider = ({ children }) => {
-  const [cart, setCart] = UseLocalStorage('cart', []);
-  const [historyPurchase, setHistoryPurchase] = UseLocalStorage('history', {});
+  const [cart, setCart] = useLocalStorage('cart', []);
+  const [historyPurchase, setHistoryPurchase] = useLocalStorage('history', {});
   const addToHistoryPurchase = (_id) => {
     let historyOrders = { ...historyPurchase };
     if (historyOrders[_id]) {

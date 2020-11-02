@@ -1,6 +1,34 @@
 import styled from 'styled-components/macro';
 import { Link as ReachRouterLink } from 'react-router-dom';
 
+export const NumOfItems = styled.div`
+  top: -21px;
+  width: 24px;
+  height: 24px;
+  right: -15px;
+  font-size: 0.8rem;
+  background: #fa2297;
+  color: #fff;
+  display: flex;
+  border-radius: 50%;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  transform: translate(0, 0);
+  transition: transform 0.3s cubic-bezier(0.1, 0.71, 0.58, 1.3);
+`;
+
+export const Icon = styled(ReachRouterLink)`
+  cursor: pointer;
+  margin: 4em;
+  position: relative;
+  .fa-shopping-cart {
+    &::before {
+      content: '';
+    }
+  }
+`;
 export const Container = styled.div`
   display: flex;
   top: 2;
@@ -9,6 +37,17 @@ export const Container = styled.div`
   margin: 0 56px;
   height: 64px;
   padding: 48px 0;
+  .wrapper__icon__user {
+    @media (max-width: 1000px) {
+      display: none;
+    }
+  }
+  .menu__hamburger {
+    display: none;
+    @media (max-width: 1000px) {
+      display: block;
+    }
+  }
 
   .add_book {
     width: fit-content;
@@ -105,39 +144,4 @@ export const SearchInput = styled.input`
 export const Search = styled.div`
   display: flex;
   align-items: center;
-`;
-
-export const NumOfItems = styled.div`
-  top: -21px;
-  width: 24px;
-  height: 24px;
-  right: -15px;
-  font-size: 0.8rem;
-  background: #fa2297;
-  color: #fff;
-  display: flex;
-  border-radius: 50%;
-  position: absolute;
-  justify-content: center;
-  align-items: center;
-  font-weight: bold;
-  transform: translate(0, 0);
-  transition: transform 0.3s cubic-bezier(0.1, 0.71, 0.58, 1.3);
-`;
-
-export const Icon = styled(ReachRouterLink)`
-  cursor: pointer;
-  margin: 4em;
-  position: relative;
-  .fa-shopping-cart {
-    &::before {
-      content: '';
-    }
-  }
-`;
-
-export const Title = styled.h1`
-  font-size: 25px;
-  color: white;
-  text-align: center;
 `;

@@ -19,7 +19,7 @@ export const Container = styled.div`
     props.login &&
     css`
       position: absolute;
-      top: 2em;
+      top: 10em;
       right: 35em;
     `}
   max-width: 450px;
@@ -107,6 +107,12 @@ export const Submit = styled.button`
   font-size: 16px;
   font-weight: bold;
   margin: 24px 0 12px;
+  ${(props) =>
+    props.editBook &&
+    css`
+      margin: 0;
+      margin-top: 7px;
+    `}
   padding: 16px;
   border: 0;
   color: white;

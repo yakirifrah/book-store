@@ -3,7 +3,7 @@ import { Modal, Form } from '../../components';
 import { Button } from 'antd';
 
 export default function EditBook({ children, ...restProps }) {
-  const { modalEditBook, handleCancel, item, handleUpdateItem } = restProps;
+  const { modalEditBook, handleCancel, item, handleUpdateItem, error } = restProps;
   const myItemFromProp = item;
   const changeInput = useRef(true);
   const [myItem, setMyItem] = useState(myItemFromProp);
@@ -23,18 +23,7 @@ export default function EditBook({ children, ...restProps }) {
       title="Edit book"
       visible={modalEditBook}
       onCancel={handleCancel}
-      bodyStyle={{ backgroundColor: '#333333', height: 'fit-content' }}
-      footer={[
-        <Button
-          form="editBook"
-          key="submit"
-          htmlType="submit"
-          disabled={changeInput.current || isInvalid}
-          onClick={(e) => handleUpdateItem(e, myItem)}
-        >
-          update
-        </Button>,
-      ]}
+      footer={null}
       editModal
     >
       <Form id="editBook">
@@ -120,6 +109,17 @@ export default function EditBook({ children, ...restProps }) {
               editForm
             />
           </Form.Label>
+          {error && <Form.Error>{error}</Form.Error>}
+          <Form.Submit
+            form="editBook"
+            key="submit"
+            htmlType="submit"
+            disabled={changeInput.current || isInvalid}
+            onClick={(e) => handleUpdateItem(e, myItem)}
+            editBook
+          >
+            update
+          </Form.Submit>
         </Form.Base>
       </Form>
     </Modal>

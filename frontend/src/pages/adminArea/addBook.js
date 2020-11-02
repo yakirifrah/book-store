@@ -18,7 +18,8 @@ export default function AddBook() {
     title === '' ||
     description === '' ||
     publisher?.publisherName === '';
-  const handleAddBook = async () => {
+  const handleAddBook = async (event) => {
+    event.preventDefault();
     try {
       const { token } = authAdminListener();
 
@@ -28,6 +29,7 @@ export default function AddBook() {
           description,
           price,
           publisher,
+          imageURL,
           title,
         },
         {
@@ -40,7 +42,7 @@ export default function AddBook() {
     } catch (error) {
       setError(error.message);
     }
-    return await history.goBack();
+    return history.goBack();
   };
 
   return (

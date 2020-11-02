@@ -4,18 +4,23 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { Link } from 'react-router-dom';
 import Fuse from 'fuse.js';
-import { Card, Header, Modal, Loading } from '../components';
+import { Card, Header, Modal, Loading, Burger, Menu } from '../components';
 import { EditBook } from '../pages/adminArea';
 import { authAdminListener, signOutAdmin } from '../utils';
 import { useLocation } from 'react-router-dom';
 import { StoreContext } from '../context/store';
 import * as ROUTES from '../constants/routes';
 import { addDefaultSrc } from '../utils';
+import styled from 'styled-components/macro';
 import API from '../api';
+
+import FocusLock from 'react-focus-lock';
+import { useOnClickOutSide } from '../hooks';
+
 export default function BrowseContainer() {
   // state
   const [books, setBooks] = useState([]);
-  const [error, setError] = useState('');
+  const [error, setError] = useState({});
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [fetchAllBooks, setFetchAllBooks] = useState('');
@@ -23,6 +28,10 @@ export default function BrowseContainer() {
   const [deleteItem, setDeleteItem] = useState(false);
   const [editItem, setEditItem] = useState(false);
   const [modalEditBook, setModalEditBook] = useState(false);
+  const [openBurger, setOpenBurger] = useState(false);
+
+  const node = useRef();
+  useOnClickOutSide(node, () => setOpenBurger(false));
   const itemRef = useRef('');
   const { addToCart, sumQuantity } = useContext(StoreContext);
   const location = useLocation();
@@ -45,7 +54,8 @@ export default function BrowseContainer() {
         setFetchAllBooks(books);
         setLoading(false);
       } catch (error) {
-        setError(error.message);
+        let newErr = { getBooks: error.message };
+        setError((preError) => ({ ...preError, newErr }));
       }
     }
     fetchData();
@@ -63,23 +73,24 @@ export default function BrowseContainer() {
 
   const adminArea = () => (
     <>
-      <div style={{ zIndex: '115', boxShadow: '0 5px 20px rgba(0,0,0,0.25)' }}>
+      <HeaderWrapper>
         <Header>
           <Header.Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
           <Link to={`/admin/add-book`}>
             <button className="add_book">To add a new book click here! </button>
           </Link>
         </Header>
-      </div>
-
-      <Modal title="delete book" visible={visible} onOk={handleOk} onCancel={handleCancel}>
+      </HeaderWrapper>
+      <Modal title="delete book" visible={visible} onOk={handleDeleteBook} onCancel={handleCancel}>
         Remove this book!
+        {error?.deleteBook && error?.deleteBook}
       </Modal>
       <EditBook
         modalEditBook={modalEditBook}
         handleCancel={handleCancel}
         item={itemRef.current}
-        handleUpdateItem={handleUpdateItem}
+        handleEditBook={handleEditBook}
+        error={error?.editBook}
       />
       <Card>
         <Card.Entities>
@@ -126,12 +137,7 @@ export default function BrowseContainer() {
 
   const userArea = () => (
     <>
-      <div
-        style={{
-          zIndex: '115',
-          boxShadow: '0 5px 20px rgba(0,0,0,0.25)',
-        }}
-      >
+      <HeaderWrapper>
         <Header>
           <Header.Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
           <div className="wrapper__icon__user">
@@ -143,9 +149,15 @@ export default function BrowseContainer() {
               {sumQuantity() > 0 && <Header.NumOfItems>{sumQuantity()}</Header.NumOfItems>}
             </Header.Icon>
           </div>
+          <div className="menu__hamburger" ref={node}>
+            <FocusLock disabled={!openBurger}>
+              <Burger openBurger={openBurger} setOpenBurger={setOpenBurger} />
+              <Menu openBurger={openBurger} setOpenBurger={setOpenBurger} />
+            </FocusLock>
+          </div>
         </Header>
-      </div>
-      <Card>
+      </HeaderWrapper>
+      <Card openBurger={openBurger}>
         <Card.Entities>
           {books.map((item) => {
             const { _id, imageURL, title } = item;
@@ -181,7 +193,8 @@ export default function BrowseContainer() {
     itemRef.current = id;
   };
 
-  const handleOk = async (event) => {
+  const handleDeleteBook = async (event) => {
+    event.preventDefault();
     try {
       const { token } = JSON.parse(sessionStorage.getItem('login'));
       await API.deleteBook(itemRef.current, {
@@ -192,7 +205,8 @@ export default function BrowseContainer() {
       });
       setDeleteItem(true);
     } catch (error) {
-      setError(error.message);
+      let newErr = { deleteBook: error.message };
+      setError((prevError) => ({ ...prevError, newErr }));
     }
 
     setVisible(false);
@@ -208,7 +222,7 @@ export default function BrowseContainer() {
     setModalEditBook(true);
   };
 
-  const handleUpdateItem = async (e, newItem) => {
+  const handleEditBook = async (e, newItem) => {
     const { token } = JSON.parse(sessionStorage.getItem('login'));
     const { author, description, price, publisher, title } = newItem;
     const { _id } = newItem;
@@ -234,7 +248,8 @@ export default function BrowseContainer() {
       setModalEditBook(false);
       setEditItem((prevState) => !prevState);
     } catch (error) {
-      setError(error.message);
+      let newErr = { editBook: error.message };
+      setError((prevError) => ({ ...prevError, newErr }));
     }
   };
 
@@ -244,10 +259,23 @@ export default function BrowseContainer() {
         <Loading />
       ) : (
         <>
-          <Loading.ReleaseBody />
-          {isAdmin ? adminArea() : userArea()}
+          {error?.getBooks ? (
+            <p>{error?.getBooks}</p>
+          ) : (
+            <>
+              <Loading.ReleaseBody />
+              {isAdmin ? adminArea() : userArea()}
+            </>
+          )}
         </>
       )}
     </>
   );
 }
+const HeaderWrapper = styled.div`
+  z-index: 115;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+  position: sticky;
+  top: 0;
+  background-color: #1e272e;
+`;

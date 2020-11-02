@@ -5,6 +5,14 @@ export const Container = styled.div`
   margin-right: 100px;
   margin-top: 51px;
   padding: 4em;
+  @media (max-width: 1000px) {
+    margin-left: 0;
+  }
+  ${(props) =>
+    props.openBurger &&
+    css`
+      width: 50vw;
+    `}
 `;
 
 export const Title = styled.figcaption`
@@ -94,8 +102,11 @@ export const Entities = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 20px;
-  @media (max-width: 1300px) {
+  @media (max-width: 1366px) {
     grid-template-columns: 1fr 1fr;
+  }
+  @media (max-width: 1000px) {
+    grid-template-columns: 1fr;
   }
 `;
 
