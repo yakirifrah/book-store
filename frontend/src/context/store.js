@@ -6,6 +6,7 @@ const StoreProvider = ({ children }) => {
   const [cart, setCart] = useLocalStorage('cart', []);
   const [historyPurchase, setHistoryPurchase] = useLocalStorage('history', {});
   const addToHistoryPurchase = (_id) => {
+    console.log('_id: ', _id);
     let historyOrders = { ...historyPurchase };
     if (historyOrders[_id]) {
       historyOrders[_id].push(cart);

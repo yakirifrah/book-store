@@ -4,7 +4,7 @@ import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button } from 'antd';
 import { authUserListener } from '../utils';
-import { Modal,Cart } from '../components';
+import { Modal, Cart } from '../components';
 import { Login } from '../pages/common';
 import { StoreContext } from '../context/store';
 import { addDefaultSrc } from '../utils';

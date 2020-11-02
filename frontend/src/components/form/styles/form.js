@@ -16,17 +16,20 @@ export const Container = styled.div`
       margin-top: 2em;
     `}
   ${(props) =>
-    props.login || props.signUp ?
-    css`
-      position: absolute;
-      top: 10em;
-      right: 35em;
-      `
-    :
-    ''
-    }
+    props.login || props.signUp
+      ? css`
+          position: absolute;
+          top: 10em;
+          right: 35em;
+        `
+      : ''}
   max-width: 450px;
   padding: 60px 68px 40px;
+  ${(props) =>
+    props.editBook &&
+    css`
+      padding-top: 1px;
+    `}
   margin-bottom: 100px;
   ${(props) =>
     props.modalLogin &&
@@ -91,7 +94,7 @@ export const Input = styled.input`
   padding: 5px 20px;
   margin-bottom: 20px;
   ${(props) =>
-    props.editForm &&
+    props.editBook &&
     css`
       margin-left: 17px;
       line-height: 31px;
@@ -142,7 +145,7 @@ export const TextArea = styled.textarea`
   margin-bottom: 20px;
   min-height: 115px;
   ${(props) =>
-    props.editForm &&
+    props.editBook &&
     css`
       margin-left: 17px;
       line-height: 31px;

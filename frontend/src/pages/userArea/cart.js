@@ -30,5 +30,4 @@ const Wrapper = styled.div`
   width: inherit;
   display: flex;
   justify-content: center;
- 
 `;

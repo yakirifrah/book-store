@@ -36,11 +36,21 @@ const createSendToken = (user, statusCode, res) => {
 };
 
 module.exports = {
-  signup: catchAsync(async (req, res) => {
+  signup: catchAsync(async (req, res, next) => {
+    const { userName, password, role } = req.body;
+    const user = await User.findOne({ userName }).select('+password');
+    if (
+      user &&
+      user.userName === userName &&
+      (await user.correctPassword(password, user.password)) &&
+      (await user.havePermission(role, user.role)) === 0
+    ) {
+      return next(new AppError('The user already exists', 403));
+    }
     const newUser = await User.create({
-      userName: req.body.userName,
-      password: req.body.password,
-      role: req.body.role,
+      userName: userName,
+      password: password,
+      role: role,
     });
     createSendToken(newUser, 201, res);
   }),
@@ -52,21 +62,20 @@ module.exports = {
     }
 
     const user = await User.findOne({ userName }).select('+password');
-
+    if (!user || !(await user.correctPassword(password, user.password))) {
+      return next(new AppError('Incorrect username or password', 401));
+    }
     if ((await user.havePermission(role, user.role)) !== 0) {
       return next(
         new AppError('You are not permission to login to this area!', 403)
       );
-    }
-    if (!user || !(await user.correctPassword(password, user.password))) {
-      return next(new AppError('Incorrect username or password', 401));
     }
 
     const token = signToken(user._id);
 
     res.status(200).json({
       status: 'success',
-      user_id:user._id,
+      user_id: user._id,
       token,
     });
   }),

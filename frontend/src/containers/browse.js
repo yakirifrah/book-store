@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useRef, useContext } from 'react';
-import { Link,useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { faShoppingCart, faHistory } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Fuse from 'fuse.js';
 import FocusLock from 'react-focus-lock';
-import { authAdminListener, signOutAdmin,addDefaultSrc } from '../utils';
+import { authAdminListener, signOutAdmin, addDefaultSrc } from '../utils';
 import { StoreContext } from '../context/store';
 import * as ROUTES from '../constants/routes';
 import { useOnClickOutSide } from '../hooks';
@@ -50,7 +50,7 @@ export default function BrowseContainer() {
         setFetchAllBooks(books);
         setLoading(false);
       } catch (error) {
-        let newErr = { getBooks: error.message };
+        let newErr = { getBooks: error.response.data.message };
         setError((preError) => ({ ...preError, newErr }));
       }
     }
@@ -201,7 +201,7 @@ export default function BrowseContainer() {
       });
       setDeleteItem(true);
     } catch (error) {
-      let newErr = { deleteBook: error.message };
+      let newErr = { deleteBook: error.response.data.message };
       setError((prevError) => ({ ...prevError, newErr }));
     }
 
@@ -222,7 +222,6 @@ export default function BrowseContainer() {
     const { token } = JSON.parse(sessionStorage.getItem('login'));
     const { author, description, price, publisher, title } = newItem;
     const { _id } = newItem;
-    console.log({ newItem });
     try {
       await API.updateBook(
         _id,
@@ -240,11 +239,10 @@ export default function BrowseContainer() {
           },
         },
       );
-
       setModalEditBook(false);
       setEditItem((prevState) => !prevState);
     } catch (error) {
-      let newErr = { editBook: error.message };
+      let newErr = { editBook: error.response.data.message };
       setError((prevError) => ({ ...prevError, newErr }));
     }
   };

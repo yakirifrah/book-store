@@ -42,7 +42,9 @@ export default function Login({ role = 'user', path, modalLogin = false }) {
 
       return history.push('/');
     } catch (error) {
-      setError(error.message);
+      setError(error.response.data.message);
+      setPassword('');
+      setUserName('');
     }
   };
   return (

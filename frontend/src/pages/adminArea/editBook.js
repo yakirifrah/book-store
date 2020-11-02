@@ -25,7 +25,7 @@ export default function EditBook({ children, ...restProps }) {
       footer={null}
       editModal
     >
-      <Form id="editBook">
+      <Form id="editBook" editBook>
         <Form.Title>Edit book</Form.Title>
         <Form.Base>
           <Form.Label>
@@ -37,7 +37,7 @@ export default function EditBook({ children, ...restProps }) {
                 changeInput.current = false;
                 setMyItem((prevState) => ({ ...prevState, title: target.value }));
               }}
-              editForm
+              editBook
             />
           </Form.Label>
           <Form.Label>
@@ -52,7 +52,7 @@ export default function EditBook({ children, ...restProps }) {
                 };
                 setMyItem((prevState) => ({ ...prevState, newAuthor }));
               }}
-              editForm
+              editBook
             />
           </Form.Label>
           <Form.Label>
@@ -67,7 +67,7 @@ export default function EditBook({ children, ...restProps }) {
                 };
                 setMyItem((prevState) => ({ ...prevState, newPublisher }));
               }}
-              editForm
+              editBook
             />
           </Form.Label>
           <Form.Label>
@@ -79,7 +79,7 @@ export default function EditBook({ children, ...restProps }) {
                 changeInput.current = false;
                 setMyItem((prevState) => ({ ...prevState, imageURL: target.imageURL }));
               }}
-              editForm
+              editBook
             />
           </Form.Label>
           <Form.Label>
@@ -92,7 +92,7 @@ export default function EditBook({ children, ...restProps }) {
                 changeInput.current = false;
                 setMyItem((prevState) => ({ ...prevState, price: target.value }));
               }}
-              editForm
+              editBook
             />
           </Form.Label>
           <Form.Label>
@@ -105,7 +105,7 @@ export default function EditBook({ children, ...restProps }) {
                 changeInput.current = false;
                 setMyItem((prevState) => ({ ...prevState, description: target.value }));
               }}
-              editForm
+              editBook
             />
           </Form.Label>
           {error && <Form.Error>{error}</Form.Error>}

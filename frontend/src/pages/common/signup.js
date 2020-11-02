@@ -10,19 +10,33 @@ export default function SignUp() {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+
   const role = location.pathname === '/admin/signup' ? 'admin' : 'user';
   const isInvalid = userName === '' || password === '';
+
   const handleSignup = async (event) => {
     event.preventDefault();
-
     try {
-      await API.signUpUser({
+      const res = await API.signUpUser({
         userName,
         password,
         role,
       });
+      if (role === 'admin') {
+        sessionStorage.setItem(
+          'login',
+          JSON.stringify({ userName, password, role, token: res.data.token, login: true }),
+        );
+      } else {
+        localStorage.setItem(
+          'login',
+          JSON.stringify({ userName, password, role, token: res.data.token, login: true }),
+        );
+      }
     } catch (error) {
-      setError(error.message);
+      setUserName('');
+      setPassword('');
+      return setError(error.response.data.message);
     }
     return role === 'admin' ? history.push('/admin/browse') : history.push(ROUTES.HOME);
   };
@@ -32,8 +46,7 @@ export default function SignUp() {
       <Form signUp>
         <Form.Title>Sign Up</Form.Title>
         {error && <Form.Error>{error}</Form.Error>}
-
-        <Form.Base onSubmit={handleSignup} method="POST">
+        <Form.Base onSubmit={handleSignup}>
           <Form.Input
             placeholder="user name"
             value={userName}

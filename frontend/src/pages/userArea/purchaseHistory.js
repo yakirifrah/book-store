@@ -26,4 +26,8 @@ const NavBar = styled.div`
 
 const Wrapper = styled.div`
   position: relative;
+  width: inherit;
+  height: inherit;
+  display: flex;
+  justify-content: center;
 `;
