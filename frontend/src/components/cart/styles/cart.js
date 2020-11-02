@@ -5,7 +5,6 @@ export const Container = styled.div`
   position: absolute;
   flex-direction: column;
   top: 100px;
-  margin: 0px 12rem 0px 12rem;
 `;
 
 export const Title = styled.div`
@@ -81,5 +80,6 @@ export const Meta = styled.div`
 
 export const Entities = styled.div`
   display: flex;
+  margin: 0 auto;
   flex-direction: column;
 `;
