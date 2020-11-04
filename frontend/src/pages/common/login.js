@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { Form } from '../../components';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import API from '../../api';
+import styled from 'styled-components/macro';
 
-export default function Login({ role = 'user', path, modalLogin = false }) {
+export default function Login({ role = 'user', path, modalLogin = false, setShowModalLogin,setUserId }) {
   const history = useHistory();
+  const location = useLocation();
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const isInvalid = password === '' || userName === '';
-
   const handleSignIn = async (event) => {
     event.preventDefault();
     try {
@@ -39,6 +40,8 @@ export default function Login({ role = 'user', path, modalLogin = false }) {
           role: role,
         }),
       );
+      if (location.pathname === '/my-cart') return setShowModalLogin(false);
+      else if (location.pathname === '/my-orders') return setUserId(res?.data?.user_id || '');
 
       return history.push('/');
     } catch (error) {
@@ -48,7 +51,7 @@ export default function Login({ role = 'user', path, modalLogin = false }) {
     }
   };
   return (
-    <>
+    <Wrapper>
       <Form modalLogin={modalLogin} login={!modalLogin}>
         <Form.Title>Sign In</Form.Title>
         {error && <Form.Error>{error}</Form.Error>}
@@ -73,6 +76,14 @@ export default function Login({ role = 'user', path, modalLogin = false }) {
           </Form.Submit>
         </Form.Base>
       </Form>
-    </>
+    </Wrapper>
   );
 }
+
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: inherit;
+  width: inherit;
+`

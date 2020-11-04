@@ -17,7 +17,6 @@ export default {
   },
   //Update Book
   updateBook: (id, data = {}, config = {}) => {
-    console.log(data);
     return axios.patch(`/api/v1/books/${id}`, { ...data }, { ...config });
   },
 

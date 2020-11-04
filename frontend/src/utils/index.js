@@ -9,7 +9,7 @@ export const authAdminListener = () => {
 export const signOutAdmin = () => {
   const user = JSON.parse(sessionStorage.getItem('login'));
   if (user?.login && user?.token && user?.role === 'admin') {
-    return sessionStorage.clear();
+    return sessionStorage.removeItem('login');
   }
 };
 
@@ -24,7 +24,7 @@ export const authUserListener = () => {
 export const signOutUser = () => {
   const user = JSON.parse(localStorage.getItem('login'));
   if (user?.login && user?.token && user?.role === 'user') {
-    return localStorage.clear();
+    return localStorage.removeItem('login');
   }
 };
 
