@@ -9,20 +9,12 @@ export const Container = styled.div`
   border-radius: 5px;
   box-sizing: border-box;
   width: 100%;
-  margin: auto;
+  //margin: auto;
   ${(props) =>
     props.addBook &&
     css`
       margin-top: 2em;
     `}
-  ${(props) =>
-    props.login || props.signUp
-      ? css`
-          position: absolute;
-          top: 10em;
-          right: 35em;
-        `
-      : ''}
   max-width: 450px;
   padding: 60px 68px 40px;
   ${(props) =>
@@ -30,7 +22,6 @@ export const Container = styled.div`
     css`
       padding-top: 1px;
     `}
-  margin-bottom: 100px;
   ${(props) =>
     props.modalLogin &&
     css`

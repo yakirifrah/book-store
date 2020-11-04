@@ -104,7 +104,7 @@ export default function CartContainer() {
               okButtonProps={{ style: { display: 'none' } }}
               login
             >
-              <Login modalLogin={true} />
+              <Login modalLogin={true} setShowModalLogin={setShowModalLogin} />
             </Modal>
             <Modal
               title="The order"
