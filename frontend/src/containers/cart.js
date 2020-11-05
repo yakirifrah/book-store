@@ -31,7 +31,7 @@ export default function CartContainer() {
     <>
       <Cart>
         <Cart.Entities>
-          {cart.map((item) => {
+          {Object.values(cart).map((item) => {
             const { _id, imageURL, title, price } = item;
             return (
               <Cart.Item key={_id}>
@@ -77,7 +77,7 @@ export default function CartContainer() {
             );
           })}
         </Cart.Entities>
-        {cart?.length && (
+        {Object.keys(cart).length && (
           <Footer>
             <div className="final-payment">
               <h3 className="final-payment__title">Final payment:</h3>

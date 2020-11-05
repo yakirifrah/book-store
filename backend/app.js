@@ -15,11 +15,15 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 if (process.env.NODE_ENV === 'development') {
+  console.log('Dev');
   app.use(morgan('dev'));
 }
 
 if (process.env.NODE_ENV === 'production') {
-  app.use('build',express.static(path.resolve(__dirname,'../frontend' ,'build')));
+  app.use(
+    'build',
+    express.static(path.resolve(__dirname, '../frontend', 'build'))
+  );
   app.use(express.static('public'));
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, '../frontend', 'build', 'index.html'));
@@ -28,8 +32,6 @@ if (process.env.NODE_ENV === 'production') {
 
 // ROUTES
 app.use('/api/v1/books', bookRoute);
-
-
 
 app.use('/api/v1/users', userRoute);
 

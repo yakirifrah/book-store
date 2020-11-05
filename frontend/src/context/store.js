@@ -3,55 +3,61 @@ import { useLocalStorage } from './../hooks';
 const StoreContext = createContext();
 
 const StoreProvider = ({ children }) => {
-  const [cart, setCart] = useLocalStorage('cart', []);
+  const [cart, setCart] = useLocalStorage('cart', {});
   const [historyPurchase, setHistoryPurchase] = useLocalStorage('history', {});
-  const addToHistoryPurchase = (_id) => {
-    console.log('_id: ', _id);
-    let historyOrders = { ...historyPurchase };
-    if (historyOrders[_id]) {
-      historyOrders[_id].push(cart);
+
+  const addToHistoryPurchase = (userId) => {
+    let copyHistoryPurchase = { ...historyPurchase };
+    let copyCart ={...cart};
+    if (copyHistoryPurchase[userId]) {
+      for (const [key, value] of Object.entries(cart)) {
+        if (copyHistoryPurchase[userId][key]) {
+          copyCart = {...copyHistoryPurchase[userId]};
+          copyCart[key].quantity =
+              copyCart[key].quantity + value.quantity;
+        }
+      }
+      copyHistoryPurchase[userId]={...copyHistoryPurchase[userId],...copyCart};
     }
-    historyOrders[_id] = [...cart];
-    setHistoryPurchase({ ...historyOrders });
-    setCart([]);
+    else  {
+      copyHistoryPurchase[userId] = { ...copyCart };
+    }
+    setHistoryPurchase((prevState) => ({ ...prevState, ...copyHistoryPurchase }));
+    setCart({});
   };
 
   const deleteItem = (_id) => {
-    let tempCart = JSON.parse(localStorage.getItem('cart'));
-    tempCart = tempCart.filter((item) => item._id !== _id);
-    setCart(tempCart);
+    const copyCart = { ...cart };
+    delete copyCart[_id];
+    setCart(copyCart);
   };
 
   const addToCart = (item) => {
-    let quantity;
-    let tempCart = JSON.parse(localStorage.getItem('cart'));
-
-    if (!tempCart?.length) {
-      quantity = 1;
-      item.quantity = quantity;
-      return setCart((prevCart) => [...prevCart, item]);
+    const itemId = item._id;
+    const copyCart = { ...cart };
+    if (!copyCart[itemId]) {
+      item.quantity = 1;
+      copyCart[itemId] = { ...item };
+      return setCart((prevCart) => ({ ...prevCart, ...copyCart }));
     }
-    const selectedCart = tempCart.find((el) => el._id === item._id);
-    if (selectedCart) {
-      const index = tempCart.indexOf(selectedCart);
-      tempCart[index].quantity++;
-      return setCart((prevCart) => [...tempCart]);
-    }
-    item.quantity = 1;
-    return setCart((prevCart) => [...prevCart, item]);
+    copyCart[itemId].quantity++;
+    return setCart((prevCart) => ({ ...prevCart, ...copyCart }));
   };
 
   const sumQuantity = () => {
-    return cart.reduce((a, b) => a + (b.quantity || 0), 0);
+    return Object.keys(cart).reduce((sum, key) => sum + parseFloat(cart[key].quantity || 0), 0);
   };
 
   const totalPurchaseToPay = () => {
-    return cart.reduce((a, b) => a + (b.quantity * b.price || 0), 0);
+    return Object.keys(cart).reduce(
+      (sum, key) => sum + parseFloat(cart[key].quantity * cart[key].price || 0),
+      0,
+    );
   };
 
-  const getHistoryPurchasesById = (_id) => {
-    let history = JSON.parse(localStorage.getItem('history'));
-    return history[_id];
+  const getHistoryPurchasesByUser = (userId) => {
+    if (!historyPurchase[userId]) return;
+    return Object.values(historyPurchase[userId]);
   };
 
   return (
@@ -64,7 +70,7 @@ const StoreProvider = ({ children }) => {
         addToHistoryPurchase: addToHistoryPurchase,
         sumQuantity: sumQuantity,
         totalPurchaseToPay: totalPurchaseToPay,
-        getHistoryPurchasesById: getHistoryPurchasesById,
+        getHistoryPurchasesByUser: getHistoryPurchasesByUser,
       }}
     >
       {children}

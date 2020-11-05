@@ -4,7 +4,13 @@ import { useHistory, useLocation } from 'react-router-dom';
 import API from '../../api';
 import styled from 'styled-components/macro';
 
-export default function Login({ role = 'user', path, modalLogin = false, setShowModalLogin,setUserId }) {
+export default function Login({
+  role = 'user',
+  path,
+  modalLogin = false,
+  setShowModalLogin,
+  setUserId,
+}) {
   const history = useHistory();
   const location = useLocation();
   const [userName, setUserName] = useState('');
@@ -86,4 +92,4 @@ const Wrapper = styled.div`
   align-items: center;
   height: inherit;
   width: inherit;
-`
+`;

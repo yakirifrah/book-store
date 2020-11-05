@@ -8,7 +8,7 @@ import styled from 'styled-components/macro';
 
 export default function PurchaseHistoryContainer() {
   const [userId] = useState(authUserListener()?.user_id || '');
-  const { getHistoryPurchasesById } = useContext(StoreContext);
+  const { getHistoryPurchasesByUser } = useContext(StoreContext);
   const renderLogin = () => {
     return (
       <Wrapper>
@@ -26,7 +26,7 @@ export default function PurchaseHistoryContainer() {
       ) : (
         <Cart>
           <Cart.Entities>
-            {getHistoryPurchasesById(userId)?.map((item) => {
+            {getHistoryPurchasesByUser(userId)?.map((item) => {
               const { _id, title, imageURL, price } = item;
               return (
                 <Cart.Item key={_id}>

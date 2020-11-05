@@ -119,7 +119,7 @@ export default function BrowseContainer() {
     return (
       <>
         <Card.Title>{title}</Card.Title>
-        <Card.SubTitle>By{author?.fullName}</Card.SubTitle>
+        <Card.SubTitle>By {author?.fullName}</Card.SubTitle>
         <div className="book__details">
           {' '}
           <hr />
