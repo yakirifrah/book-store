@@ -19,7 +19,7 @@ export const NumOfItems = styled.div`
   transition: transform 0.3s cubic-bezier(0.1, 0.71, 0.58, 1.3);
 `;
 
-export const Icon = styled(ReachRouterLink)`
+export const IconLink = styled(ReachRouterLink)`
   cursor: pointer;
   margin: 1em;
   position: relative;
@@ -28,6 +28,17 @@ export const Icon = styled(ReachRouterLink)`
       content: '';
     }
   }
+  svg {
+    &:hover {
+      color: #95a5a6;
+    }
+  }
+`;
+
+export const Icon = styled.span`
+  cursor: pointer;
+  margin: 1em;
+  position: relative;
   svg {
     &:hover {
       color: #95a5a6;

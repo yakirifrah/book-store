@@ -1,8 +1,8 @@
-import React, { useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'antd';
 import { Cart } from '../components';
-import { BookContext } from '../store/contexts/bookContext';
+import { BookContext } from '../store/contexts';
 import { addDefaultSrc, authUserListener } from '../utils';
 import styled from 'styled-components/macro';
 

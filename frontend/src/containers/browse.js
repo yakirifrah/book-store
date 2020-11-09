@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useContext } from 'react';
+import { useEffect, useState, useRef, useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { faShoppingCart, faHistory } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,13 +7,12 @@ import { authAdminListener, signOutAdmin, addDefaultSrc } from '../utils';
 import { BookContext } from '../store/contexts';
 import * as ROUTES from '../constants/routes';
 import { useOnClickOutSide } from '../hooks';
-import { Card, Header, Modal, Loading, Burger, Menu, Search } from '../components';
+import { Card, Header, Modal, Loading, Burger, Menu, DropDownMenuAccount } from '../components';
 import { EditBook } from '../pages/adminArea';
 import API from '../api';
 import styled from 'styled-components/macro';
 
 export default function BrowseContainer() {
-  // state
   const [books, setBooks] = useState([]);
   const [error, setError] = useState({});
   const [loading, setLoading] = useState(true);
@@ -150,13 +149,14 @@ export default function BrowseContainer() {
         <Header>
           <Header.Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
           <div className="wrapper__icon__user">
-            <Header.Icon to={ROUTES.MY_ORDER_HISTORY}>
+            <Header.IconLink to={ROUTES.MY_ORDER_HISTORY}>
               <FontAwesomeIcon icon={faHistory} color="white" size="lg" title="order history" />
-            </Header.Icon>
-            <Header.Icon to={ROUTES.MY_CART}>
+            </Header.IconLink>
+            <Header.IconLink to={ROUTES.MY_CART}>
               <FontAwesomeIcon icon={faShoppingCart} color="white" size="lg" title="shooing cart" />
               {sumQuantity() > 0 && <Header.NumOfItems>{sumQuantity()}</Header.NumOfItems>}
-            </Header.Icon>
+            </Header.IconLink>
+            <DropDownMenuAccount />
           </div>
           <div className="menu__hamburger" ref={node}>
             <FocusLock disabled={!openBurger}>
@@ -166,8 +166,6 @@ export default function BrowseContainer() {
           </div>
         </Header>
       </HeaderWrapper>
-      {/*<BrowseWrapper>*/}
-      {/*<Search searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>*/}
       <Card openBurger={openBurger}>
         <Card.Entities>
           {books.map((item) => {
@@ -196,7 +194,6 @@ export default function BrowseContainer() {
           })}
         </Card.Entities>
       </Card>
-      {/*</BrowseWrapper>*/}
     </>
   );
 
@@ -289,12 +286,3 @@ const HeaderWrapper = styled.div`
   top: 0;
   background-color: #1e272e;
 `;
-
-//
-// const BrowseWrapper = styled.div`
-//   height: inherit;
-//   width: inherit;
-//   display: flex;
-//   align-items: center;
-//   flex-direction: column;
-// `;

@@ -1,5 +1,12 @@
-import React from 'react';
-import { Container, SearchIcon, SearchInput, Search, Icon, NumOfItems } from './styles/header';
+import {
+  Container,
+  SearchIcon,
+  SearchInput,
+  Search,
+  IconLink,
+  NumOfItems,
+  Icon,
+} from './styles/header';
 
 export default function Header({ children, ...restProps }) {
   return <Container {...restProps}>{children}</Container>;
@@ -19,6 +26,9 @@ Header.Search = function HeaderSearch({ searchTerm, setSearchTerm, ...restProps 
   );
 };
 
+Header.IconLink = function HeaderIconLink({ children, ...restProps }) {
+  return <IconLink {...restProps}>{children}</IconLink>;
+};
 Header.Icon = function HeaderIcon({ children, ...restProps }) {
   return <Icon {...restProps}>{children}</Icon>;
 };

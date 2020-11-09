@@ -9,7 +9,7 @@ export const authAdminListener = () => {
 export const signOutAdmin = () => {
   const user = JSON.parse(sessionStorage.getItem('admin'));
   if (user?.login && user?.token && user?.role === 'admin') {
-    return sessionStorage.removeItem('login');
+    return sessionStorage.removeItem('admin');
   }
 };
 
@@ -24,10 +24,21 @@ export const authUserListener = () => {
 export const signOutUser = () => {
   const user = JSON.parse(localStorage.getItem('user'));
   if (user?.login && user?.token && user?.role === 'user') {
-    return localStorage.removeItem('login');
+    return localStorage.removeItem('user');
   }
 };
 
 export const addDefaultSrc = (event) => {
   event.target.src = '/images/books/default-placeholder-image-300x300.png';
+};
+
+export const getUser = () => {
+  return JSON.parse(sessionStorage.getItem('admin'))
+    ? JSON.parse(sessionStorage.getItem('admin'))
+    : JSON.parse(localStorage.getItem('user'));
+};
+
+export const signOut = () => {
+  localStorage.removeItem('user');
+  sessionStorage.removeItem('admin');
 };

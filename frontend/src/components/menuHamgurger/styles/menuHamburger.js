@@ -14,7 +14,8 @@ export const Menu = styled.nav`
   top: 0;
   transition: transform 2s ease-in-out;
   display: ${({ openBurger }) => (openBurger ? '' : 'none')};
-  a {
+  a,
+  span {
     font-size: 25px;
     text-transform: uppercase;
     padding: 1rem 0;
@@ -33,10 +34,12 @@ export const Menu = styled.nav`
         color: #95a5a6;
       }
     }
-
     &:first-child {
       margin-top: 3.4em;
       margin-bottom: 2em;
+    }
+    &:last-child {
+      margin-top: 2em;
     }
     @media (max-width: 660px) {
       font-size: 1.5rem;

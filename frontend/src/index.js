@@ -20,11 +20,11 @@ if (process.env.NODE_ENV === 'developer') {
 }
 
 ReactDOM.render(
-  <React.StrictMode>
+  <>
     <GlobalStyles />
     <AuthContextProvider>
       <App />
     </AuthContextProvider>
-  </React.StrictMode>,
+  </>,
   document.getElementById('root'),
 );

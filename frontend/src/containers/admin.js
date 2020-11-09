@@ -1,4 +1,3 @@
-import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { Browse, Login, Signup, NotFound } from '../pages/common';
 import { AddBook } from '../pages/adminArea';
