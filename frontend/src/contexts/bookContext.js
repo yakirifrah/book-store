@@ -9,18 +9,16 @@ const BookContextProvider = ({ children }) => {
 
   const addToHistoryPurchase = (userId) => {
     let copyHistoryPurchase = { ...historyPurchase };
-    let copyCart ={...cart};
+    let copyCart = { ...cart };
     if (copyHistoryPurchase[userId]) {
       for (const [key, value] of Object.entries(cart)) {
         if (copyHistoryPurchase[userId][key]) {
-          copyCart = {...copyHistoryPurchase[userId]};
-          copyCart[key].quantity =
-              copyCart[key].quantity + value.quantity;
+          copyCart = { ...copyHistoryPurchase[userId] };
+          copyCart[key].quantity = copyCart[key].quantity + value.quantity;
         }
       }
-      copyHistoryPurchase[userId]={...copyHistoryPurchase[userId],...copyCart};
-    }
-    else  {
+      copyHistoryPurchase[userId] = { ...copyHistoryPurchase[userId], ...copyCart };
+    } else {
       copyHistoryPurchase[userId] = { ...copyCart };
     }
     setHistoryPurchase((prevState) => ({ ...prevState, ...copyHistoryPurchase }));
@@ -79,4 +77,4 @@ const BookContextProvider = ({ children }) => {
   );
 };
 
-export {  BookContextProvider, BookContext };
+export { BookContextProvider, BookContext };

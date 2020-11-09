@@ -60,16 +60,15 @@ export default function BrowseContainer() {
   useEffect(() => {
     async function getBook() {
       try {
-        if  (searchTerm.length < 3 ) return setBooks(fetchAllBooks);
+        if (searchTerm.length < 3) return setBooks(fetchAllBooks);
         const res = await API.getBookByQuery(searchTerm);
         const {
           data: { books },
         } = res.data;
-        if ( books.length > 0 ) {
+        if (books.length > 0) {
           setBooks(books);
           setLoading(false);
-        }
-       else {
+        } else {
           setBooks(books);
           setLoading(false);
         }
