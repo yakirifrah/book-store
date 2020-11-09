@@ -39,7 +39,7 @@ Back-end : Node.js ,MongoDB ,Express, Bcrypt, JWT for authentication
 
 
 # To do
- - [ ] Adding mobx/redux to mange state app 
+ - [x] Adding mobx/redux to mange state app 
  - [ ] Bug fixes and perfomance improvements
  - [ ] Imorove the UX  & UI
 
