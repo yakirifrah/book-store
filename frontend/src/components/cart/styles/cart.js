@@ -68,8 +68,25 @@ export const Item = styled.div`
       box-shadow: 0 0 10px 1px rgba(255, 255, 255, 0.5);
       background-color: black;
       &:hover {
+        background-color: rgb(149, 165, 166);
         cursor: pointer;
       }
+    }
+  }
+  .quantity__wrapper {
+    .plus-icon,
+    .minus-icon {
+      padding: 5px;
+      border: 1px solid white;
+      border-radius: 2em;
+      &:hover {
+        background-color: rgb(149, 165, 166);
+        cursor: pointer;
+      }
+    }
+    .quantity-title {
+      margin: 1em;
+      color: white;
     }
   }
 `;

@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faTrashAlt, faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button } from 'antd';
 import { authUserListener } from '../utils';
@@ -12,16 +12,30 @@ import styled from 'styled-components/macro';
 
 export default function CartContainer() {
   const history = useHistory();
-  const { cart, deleteItem, totalPurchaseToPay, addToHistoryPurchase } = useContext(BookContext);
+  const {
+    cart,
+    deleteItem,
+    totalPurchaseToPay,
+    addToHistoryPurchase,
+    addQuantity,
+    minusQuantity,
+  } = useContext(BookContext);
   const [showModalLogin, setShowModalLogin] = useState(false);
   const [showModalOrder, setShowModalOrder] = useState(false);
+
   const handleOnClickBtnPay = (event) => {
     if (!authUserListener()) {
       return setShowModalLogin(true);
     }
     return setShowModalOrder(true);
   };
-
+  const handleOnClick = (event, type, itemId) => {
+    event.preventDefault();
+    if (type === 'plus') {
+      return addQuantity(itemId);
+    }
+    minusQuantity(itemId);
+  };
   const handleOnOKConfirmOrder = (event, cb) => {
     const userId = authUserListener().user_id;
     cb(userId);
@@ -63,15 +77,22 @@ export default function CartContainer() {
                       size="lg"
                     />
                   </div>
-                  <h3
-                    style={{
-                      color: 'white',
-                      display: 'list-item',
-                      listStyle: 'none',
-                    }}
-                  >
-                    Quantity:{item?.quantity}{' '}
-                  </h3>
+                  <div className="quantity__wrapper">
+                    <span
+                      className="plus-icon"
+                      onClick={(event) => handleOnClick(event, 'plus', item._id)}
+                    >
+                      {' '}
+                      <FontAwesomeIcon icon={faPlus} color="white" size="sm" />
+                    </span>
+                    <span className="quantity-title">{item?.quantity || 0}</span>
+                    <span
+                      className="minus-icon"
+                      onClick={(event) => handleOnClick(event, 'minus', item._id)}
+                    >
+                      <FontAwesomeIcon color="white" size="sm" icon={faMinus} />
+                    </span>
+                  </div>
                 </div>
               </Cart.Item>
             );

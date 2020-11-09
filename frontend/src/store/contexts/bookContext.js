@@ -44,7 +44,7 @@ export const BookContextProvider = ({ children }) => {
   };
 
   const sumQuantity = () => {
-    return Object.keys(cart).reduce((sum, key) => sum + parseFloat(cart[key].quantity || 0), 0);
+    return Object.keys(cart).length;
   };
 
   const totalPurchaseToPay = () => {
@@ -59,6 +59,20 @@ export const BookContextProvider = ({ children }) => {
     return Object.values(historyPurchase[userId]);
   };
 
+  const addQuantity = (id) => {
+    const copyCart = { ...cart };
+    copyCart[id].quantity += 1;
+    setCart(copyCart);
+  };
+  const minusQuantity = (id) => {
+    const copyCart = { ...cart };
+    if (copyCart[id].quantity <= 1) {
+      return deleteItem(id);
+    }
+    copyCart[id].quantity -= 1;
+    setCart(copyCart);
+  };
+
   return (
     <BookContext.Provider
       value={{
@@ -70,6 +84,8 @@ export const BookContextProvider = ({ children }) => {
         sumQuantity: sumQuantity,
         totalPurchaseToPay: totalPurchaseToPay,
         getHistoryPurchasesByUser: getHistoryPurchasesByUser,
+        addQuantity: addQuantity,
+        minusQuantity: minusQuantity,
       }}
     >
       {children}
