@@ -7,6 +7,7 @@ const authController = require('../controllers/auth');
 // /books => GET
 // /addBook => POST
 // /deleteBook => DELETE
+// /search/:search => SEARCH by book name
 
 router
   .get('/', bookController.getAllBooks)
@@ -16,6 +17,7 @@ router
     authController.restrictTo('admin'),
     bookController.addBook
   )
+  .get('/:query', bookController.getBookByName)
   .patch(
     '/:id',
     authController.protected,

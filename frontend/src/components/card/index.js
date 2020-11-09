@@ -1,4 +1,3 @@
-import React from 'react';
 import { Container, Title, SubTitle, Image, Item, Entities, Meta, Icon } from './styles/card';
 
 export default function Card({ children, ...restProps }) {

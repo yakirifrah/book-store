@@ -1,5 +1,4 @@
-import React from 'react';
-import { StoreProvider } from '../../context/store';
+import { BookContextProvider } from '../../store/contexts';
 import { CartContainer } from '../../containers';
 import styled from 'styled-components/macro';
 
@@ -9,9 +8,9 @@ export default function MyCart() {
       <NavBar>
         <h1 style={{ color: 'white' }}>My cart</h1>
       </NavBar>
-      <StoreProvider>
+      <BookContextProvider>
         <CartContainer />
-      </StoreProvider>
+      </BookContextProvider>
     </Wrapper>
   );
 }

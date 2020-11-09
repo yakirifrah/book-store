@@ -28,4 +28,8 @@ export default {
   signUpUser: (data = {}) => {
     return axios.post(`/api/v1/users/signup`, { ...data });
   },
+
+  getBookByQuery: (query) => {
+    return axios.get(`/api/v1/books/${query}`);
+  },
 };

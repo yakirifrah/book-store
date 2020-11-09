@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Modal, Form } from '../../components';
 
 export default function EditBook({ children, ...restProps }) {

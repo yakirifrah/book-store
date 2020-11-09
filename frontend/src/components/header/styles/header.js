@@ -21,11 +21,16 @@ export const NumOfItems = styled.div`
 
 export const Icon = styled(ReachRouterLink)`
   cursor: pointer;
-  margin: 4em;
+  margin: 1em;
   position: relative;
   .fa-shopping-cart {
     &::before {
       content: '';
+    }
+  }
+  svg {
+    &:hover {
+      color: #95a5a6;
     }
   }
 `;
@@ -34,7 +39,7 @@ export const Container = styled.div`
   top: 2;
   justify-content: space-between;
   align-items: center;
-  margin: 0 56px;
+  margin: 0 3em;
   height: 64px;
   padding: 48px 0;
   .wrapper__icon__user {

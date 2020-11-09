@@ -2,13 +2,13 @@ import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'antd';
 import { Cart } from '../components';
-import { StoreContext } from '../context/store';
+import { BookContext } from '../store/contexts/bookContext';
 import { addDefaultSrc, authUserListener } from '../utils';
 import styled from 'styled-components/macro';
 
 export default function PurchaseHistoryContainer() {
   const [userId] = useState(authUserListener()?.user_id || '');
-  const { getHistoryPurchasesByUser } = useContext(StoreContext);
+  const { getHistoryPurchasesByUser } = useContext(BookContext);
   const renderLogin = () => {
     return (
       <Wrapper>
@@ -73,7 +73,6 @@ export default function PurchaseHistoryContainer() {
 const Wrapper = styled.div`
   position: absolute;
   top: 9em;
-  left: 37em;
   max-width: 400px;
 `;
 

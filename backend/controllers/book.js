@@ -16,6 +16,23 @@ module.exports = {
       });
     }
   },
+  getBookByName: async (req, res) => {
+    try {
+      const books = await Book.find({
+        title: new RegExp(req.params.query, 'i'),
+      });
+      res.status(200).json({
+        status: 'success',
+        results: books.length,
+        data: { books },
+      });
+    } catch (error) {
+      res.status(400).json({
+        status: 'fail',
+        message: error,
+      });
+    }
+  },
   deleteBookById: async (req, res) => {
     try {
       await Book.findByIdAndDelete(req.params.id);

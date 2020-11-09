@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { Form } from '../../components';
-import API from '../../api';
-import * as ROUTES from '../../constants/routes';
+import { AuthContext } from '../../store/contexts';
+import { observer } from 'mobx-react-lite';
 
-export default function SignUp() {
+import * as ROUTES from '../../constants/routes';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+
+const SignUp = observer(() => {
   const history = useHistory();
   const location = useLocation();
+  const auth = useContext(AuthContext);
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -16,28 +20,17 @@ export default function SignUp() {
 
   const handleSignup = async (event) => {
     event.preventDefault();
-    try {
-      const res = await API.signUpUser({
+    await auth
+      .createUser({
         userName,
         password,
         role,
+      })
+      .catch((error) => {
+        setUserName('');
+        setPassword('');
+        return setError(error.response.data.message);
       });
-      if (role === 'admin') {
-        sessionStorage.setItem(
-          'login',
-          JSON.stringify({ userName, password, role, token: res.data.token, login: true }),
-        );
-      } else {
-        localStorage.setItem(
-          'login',
-          JSON.stringify({ userName, password, role, token: res.data.token, login: true }),
-        );
-      }
-    } catch (error) {
-      setUserName('');
-      setPassword('');
-      return setError(error.response.data.message);
-    }
     return role === 'admin' ? history.push('/admin/browse') : history.push(ROUTES.HOME);
   };
 
@@ -59,11 +52,13 @@ export default function SignUp() {
             placeholder="Password"
             onChange={({ target }) => setPassword(target.value)}
           />
-          <Form.Submit disabled={isInvalid} type="submit">
+          <Form.Submit disabled={isInvalid || auth.state === 'done'} type="submit">
+            {auth.state === 'pending' && <Form.Indicator icon={faSpinner} />}
             Sign Up
           </Form.Submit>
         </Form.Base>
       </Form>
     </>
   );
-}
+});
+export default SignUp;

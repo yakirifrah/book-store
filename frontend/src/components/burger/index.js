@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { StyledBurger } from './styles/burger';
 
 export default function Burger({ children, openBurger, setOpenBurger, ...props }) {

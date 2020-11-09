@@ -1,5 +1,5 @@
 export const authAdminListener = () => {
-  const user = JSON.parse(sessionStorage.getItem('login'));
+  const user = JSON.parse(sessionStorage.getItem('admin'));
   if (!user?.login || !user?.token || user?.role !== 'admin') {
     return;
   }
@@ -7,14 +7,14 @@ export const authAdminListener = () => {
 };
 
 export const signOutAdmin = () => {
-  const user = JSON.parse(sessionStorage.getItem('login'));
+  const user = JSON.parse(sessionStorage.getItem('admin'));
   if (user?.login && user?.token && user?.role === 'admin') {
     return sessionStorage.removeItem('login');
   }
 };
 
 export const authUserListener = () => {
-  const user = JSON.parse(localStorage.getItem('login'));
+  const user = JSON.parse(localStorage.getItem('user'));
   if (!user?.login || !user?.token || user?.role !== 'user') {
     return;
   }
@@ -22,7 +22,7 @@ export const authUserListener = () => {
 };
 
 export const signOutUser = () => {
-  const user = JSON.parse(localStorage.getItem('login'));
+  const user = JSON.parse(localStorage.getItem('user'));
   if (user?.login && user?.token && user?.role === 'user') {
     return localStorage.removeItem('login');
   }

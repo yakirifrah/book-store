@@ -1,6 +1,7 @@
 import styled from 'styled-components/macro';
 import { css } from 'styled-components/macro';
 import { Link as ReachRouterLink } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export const Container = styled.div`
   display: flex;
@@ -142,4 +143,7 @@ export const TextArea = styled.textarea`
       line-height: 31px;
       width: 100%;
     `}
+`;
+export const Indicator = styled(FontAwesomeIcon)`
+  margin-right: 15px;
 `;

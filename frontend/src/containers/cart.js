@@ -6,13 +6,13 @@ import { Button } from 'antd';
 import { authUserListener } from '../utils';
 import { Modal, Cart } from '../components';
 import { Login } from '../pages/common';
-import { StoreContext } from '../context/store';
+import { BookContext } from '../store/contexts';
 import { addDefaultSrc } from '../utils';
 import styled from 'styled-components/macro';
 
 export default function CartContainer() {
   const history = useHistory();
-  const { cart, deleteItem, totalPurchaseToPay, addToHistoryPurchase } = useContext(StoreContext);
+  const { cart, deleteItem, totalPurchaseToPay, addToHistoryPurchase } = useContext(BookContext);
   const [showModalLogin, setShowModalLogin] = useState(false);
   const [showModalOrder, setShowModalOrder] = useState(false);
   const handleOnClickBtnPay = (event) => {

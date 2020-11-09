@@ -1,9 +1,6 @@
 import styled, { css } from 'styled-components/macro';
 
 export const Container = styled.div`
-  margin-left: 100px;
-  margin-right: 100px;
-  margin-top: 51px;
   padding: 4em;
   @media (max-width: 1000px) {
     margin-left: 0;
@@ -43,12 +40,10 @@ export const Image = styled.img`
     props.editBook &&
     css`
       cursor: pointer;
+      transition: all 0.1s ease-in-out;
+
       &:hover {
-        transform: scale(1.5);
-      }
-      &:active {
-        transition: transform 0.3s;
-        transform: scale(4);
+        transform: scale(1.05) translate3d(0, 0, 0) rotate(0.1deg) translateZ(0);
       }
       display: grid;
       grid-template-columns: none;

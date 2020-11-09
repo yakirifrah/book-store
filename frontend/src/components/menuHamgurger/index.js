@@ -4,11 +4,11 @@ import { Header } from '../index';
 import * as ROUTES from '../../constants/routes';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHistory, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
-import { StoreContext } from '../../context/store';
+import { BookContext } from '../../store/contexts/bookContext';
 export default function MenuHamburger({ openBurger, ...props }) {
   const isHidden = openBurger ? true : false;
   const tabIndex = isHidden ? 0 : -1;
-  const { sumQuantity } = useContext(StoreContext);
+  const { sumQuantity } = useContext(BookContext);
   return (
     <Menu openBurger={openBurger} aria-hidden={!isHidden} {...props}>
       <Header.Icon to={ROUTES.MY_ORDER_HISTORY} tabIndex={tabIndex}>

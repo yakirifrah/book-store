@@ -1,11 +1,10 @@
-import React from 'react';
 import { BrowseContainer } from '../../containers';
-import { StoreProvider } from '../../context/store';
+import { BookContextProvider } from '../../store/contexts/bookContext';
 
 export default function Browse() {
   return (
-    <StoreProvider>
+    <BookContextProvider>
       <BrowseContainer />
-    </StoreProvider>
+    </BookContextProvider>
   );
 }

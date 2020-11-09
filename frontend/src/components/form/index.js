@@ -10,6 +10,7 @@ import {
   Submit,
   Link,
   Label,
+  Indicator,
 } from './styles/form';
 
 export default function Form({ children, ...restProps }) {
@@ -48,4 +49,7 @@ Form.Input = function FormInput({ children, ...restProps }) {
 
 Form.Submit = function FormSubmit({ children, ...restProps }) {
   return <Submit {...restProps}>{children}</Submit>;
+};
+Form.Indicator = function FormIndicator({ children, ...restProps }) {
+  return <Indicator {...restProps} />;
 };

@@ -27,10 +27,10 @@ export const Menu = styled.nav`
     margin: 0;
     &:hover {
       svg {
-        color: red;
+        color: #95a5a6;
       }
       .icon_title {
-        color: red;
+        color: #95a5a6;
       }
     }
 

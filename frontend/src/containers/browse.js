@@ -2,13 +2,12 @@ import React, { useEffect, useState, useRef, useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { faShoppingCart, faHistory } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Fuse from 'fuse.js';
 import FocusLock from 'react-focus-lock';
 import { authAdminListener, signOutAdmin, addDefaultSrc } from '../utils';
-import { StoreContext } from '../context/store';
+import { BookContext } from '../store/contexts';
 import * as ROUTES from '../constants/routes';
 import { useOnClickOutSide } from '../hooks';
-import { Card, Header, Modal, Loading, Burger, Menu } from '../components';
+import { Card, Header, Modal, Loading, Burger, Menu, Search } from '../components';
 import { EditBook } from '../pages/adminArea';
 import API from '../api';
 import styled from 'styled-components/macro';
@@ -29,7 +28,7 @@ export default function BrowseContainer() {
   const node = useRef();
   useOnClickOutSide(node, () => setOpenBurger(false));
   const itemRef = useRef('');
-  const { addToCart, sumQuantity } = useContext(StoreContext);
+  const { addToCart, sumQuantity } = useContext(BookContext);
   const location = useLocation();
 
   if (location.pathname === '/') {
@@ -42,6 +41,7 @@ export default function BrowseContainer() {
   useEffect(() => {
     async function fetchData() {
       try {
+        setLoading(true);
         const res = await API.getBooks();
         const {
           data: { books },
@@ -58,13 +58,27 @@ export default function BrowseContainer() {
   }, [deleteItem, editItem]);
 
   useEffect(() => {
-    const fuse = new Fuse(books, { keys: ['title'] });
-    const results = fuse.search(searchTerm).map(({ item }) => item);
-    if (books.length > 0 && searchTerm.length > 3 && results.length > 0) {
-      setBooks(results);
-    } else {
-      setBooks(fetchAllBooks);
+    async function getBook() {
+      try {
+        if  (searchTerm.length < 3 ) return setBooks(fetchAllBooks);
+        const res = await API.getBookByQuery(searchTerm);
+        const {
+          data: { books },
+        } = res.data;
+        if ( books.length > 0 ) {
+          setBooks(books);
+          setLoading(false);
+        }
+       else {
+          setBooks(books);
+          setLoading(false);
+        }
+      } catch (error) {
+        let newErr = { getBooks: error.response.data.message };
+        setError((preError) => ({ ...preError, newErr }));
+      }
     }
+    getBook();
   }, [searchTerm]);
 
   const renderAdminArea = () => (
@@ -153,6 +167,8 @@ export default function BrowseContainer() {
           </div>
         </Header>
       </HeaderWrapper>
+      {/*<BrowseWrapper>*/}
+      {/*<Search searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>*/}
       <Card openBurger={openBurger}>
         <Card.Entities>
           {books.map((item) => {
@@ -181,6 +197,7 @@ export default function BrowseContainer() {
           })}
         </Card.Entities>
       </Card>
+      {/*</BrowseWrapper>*/}
     </>
   );
 
@@ -273,3 +290,12 @@ const HeaderWrapper = styled.div`
   top: 0;
   background-color: #1e272e;
 `;
+
+//
+// const BrowseWrapper = styled.div`
+//   height: inherit;
+//   width: inherit;
+//   display: flex;
+//   align-items: center;
+//   flex-direction: column;
+// `;

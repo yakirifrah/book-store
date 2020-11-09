@@ -1,4 +1,3 @@
-import React from 'react';
 import { Container, Title, SubTitle, Image, Item, Meta, Icon, Entities } from './styles/cart';
 
 export default function Cart({ children, ...restProps }) {
