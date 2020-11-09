@@ -20,18 +20,18 @@ const SignUp = observer(() => {
 
   const handleSignup = async (event) => {
     event.preventDefault();
-    await auth
-      .createUser({
+    try {
+      await auth.createUser({
         userName,
         password,
         role,
-      })
-      .catch((error) => {
-        setUserName('');
-        setPassword('');
-        return setError(error.response.data.message);
       });
-    return role === 'admin' ? history.push('/admin/browse') : history.push(ROUTES.HOME);
+      return role === 'admin' ? history.push('/admin/browse') : history.push(ROUTES.HOME);
+    } catch (error) {
+      setUserName('');
+      setPassword('');
+      return setError(error.response.data.message);
+    }
   };
 
   return (

@@ -87,6 +87,7 @@ export default function BrowseContainer() {
           <Link to={`/admin/add-book`}>
             <button className="add_book">To add a new book click here! </button>
           </Link>
+          <DropDownMenuAccount />
         </Header>
       </HeaderWrapper>
       <Modal title="delete book" visible={visible} onOk={handleDeleteBook} onCancel={handleCancel}>

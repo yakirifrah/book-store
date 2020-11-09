@@ -1,4 +1,4 @@
-import  { useContext } from 'react';
+import { useContext } from 'react';
 import { Menu } from './styles/menuHamburger';
 import { Header, DropDownMenuAccount } from '../index';
 import * as ROUTES from '../../constants/routes';

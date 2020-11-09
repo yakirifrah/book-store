@@ -19,17 +19,19 @@ const Login = observer(
 
     const handleSignIn = async (event) => {
       event.preventDefault();
-      await auth.login({ userName, password, role }).catch((error) => {
+      try {
+        await auth.login({ userName, password, role });
+        if (role === 'admin') {
+          return history.push('/admin/browse', 'admin');
+        }
+        if (location.pathname === '/my-cart') return setShowModalLogin(false);
+        else if (location.pathname === '/my-orders') return setUserId(auth.user?.user_id || '');
+        return history.push('/');
+      } catch (error) {
         setError(error.response.data.message);
         setPassword('');
         setUserName('');
-      });
-      if (role === 'admin') {
-        return history.push('/admin/browse', 'admin');
       }
-      if (location.pathname === '/my-cart') return setShowModalLogin(false);
-      else if (location.pathname === '/my-orders') return setUserId(auth.user?.user_id || '');
-      return history.push('/');
     };
     return (
       <Wrapper>

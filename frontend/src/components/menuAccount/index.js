@@ -14,17 +14,24 @@ export default function MenuAccount() {
         color: 'white',
       }}
     >
-      <Menu.Item key="0">
-        {user?.userName ? (
+      {user?.userName ? (
+        <Menu.Item key="0">
           <span>{user.userName}</span>
-        ) : (
-          <sapn onClick={(e) => history.push('/Login')}>Login</sapn>
-        )}
-      </Menu.Item>
+        </Menu.Item>
+      ) : (
+        <>
+          <Menu.Item key="1">
+            <sapn onClick={(e) => history.push('/Login')}>Login as User</sapn>
+          </Menu.Item>
+          <Menu.Item key="2">
+            <sapn onClick={(e) => history.push('/Admin')}>Login as Admin</sapn>
+          </Menu.Item>
+        </>
+      )}
       {user && (
         <>
           <Menu.Divider />
-          <Menu.Item key="1">
+          <Menu.Item key="3">
             <span
               className="logout-item"
               onClick={() => {
