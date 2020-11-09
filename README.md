@@ -39,8 +39,9 @@ Back-end : Node.js ,MongoDB ,Express, Bcrypt, JWT for authentication
 
 
 # To do
- - [x] Adding mobx/redux to mange state app 
- - [ ] Bug fixes and perfomance improvements
- - [ ] Imorove the UX  & UI
+ - [x] Add mobx/redux to mange state app 
+ - [ ] Add pagination on server side && client side
+ - [ ] Bug fixes and performance improvements
+ - [ ] Improve the UX  & UI
 
 
