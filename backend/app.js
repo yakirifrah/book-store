@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
@@ -14,19 +15,18 @@ const app = express();
 // MIDDLEWARE
 app.use(cors());
 app.use(express.json());
+
 if (process.env.NODE_ENV === 'development') {
-  console.log('Dev');
   app.use(morgan('dev'));
 }
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(
-    'build',
-    express.static(path.resolve(__dirname, '../frontend', 'build'))
-  );
-  app.use(express.static('public'));
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../frontend', 'build', 'index.html'));
+  app.use(express.static('frontend/build'));
+  app.get('/admin/*', function (req, res) {
+    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
+  });
+  app.get('/', function (req, res) {
+    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
   });
 }
 

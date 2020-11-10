@@ -11,10 +11,15 @@ import {
 export default function Header({ children, ...restProps }) {
   return <Container {...restProps}>{children}</Container>;
 }
-Header.Search = function HeaderSearch({ searchTerm, setSearchTerm, ...restProps }) {
+Header.Search = function HeaderSearch({
+  searchTerm,
+  setSearchTerm,
+  handleOnClickSearchButton,
+  ...restProps
+}) {
   return (
     <Search {...restProps}>
-      <SearchIcon>
+      <SearchIcon onClick={handleOnClickSearchButton}>
         <img src="/images/icons/search.png" alt="Search" />
       </SearchIcon>
       <SearchInput

@@ -26,13 +26,15 @@ export class AuthStore {
         password,
         role,
       });
-
+      const {
+        data: { user },
+      } = res;
       if (role === 'admin') {
         sessionStorage.setItem(
           'admin',
           JSON.stringify({
             token: res.data.token,
-            user_id: res.data.user_id,
+            user_id: user._id,
             userName,
             role,
             login: true,
@@ -47,7 +49,7 @@ export class AuthStore {
           'user',
           JSON.stringify({
             token: res.data.token,
-            user_id: res.data.user_id,
+            user_id: user._id,
             userName,
             role,
             login: true,

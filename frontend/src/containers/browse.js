@@ -9,8 +9,8 @@ import * as ROUTES from '../constants/routes';
 import { useOnClickOutSide } from '../hooks';
 import { Card, Header, Modal, Loading, Burger, Menu, DropDownMenuAccount } from '../components';
 import { EditBook } from '../pages/adminArea';
-import API from '../api';
 import styled from 'styled-components/macro';
+import API from '../api';
 
 export default function BrowseContainer() {
   const [books, setBooks] = useState([]);
@@ -57,33 +57,42 @@ export default function BrowseContainer() {
   }, [deleteItem, editItem]);
 
   useEffect(() => {
-    async function getBook() {
-      try {
-        if (searchTerm.length < 3) return setBooks(fetchAllBooks);
-        const res = await API.getBookByQuery(searchTerm);
-        const {
-          data: { books },
-        } = res.data;
-        if (books.length > 0) {
-          setBooks(books);
-          setLoading(false);
-        } else {
-          setBooks(books);
-          setLoading(false);
-        }
-      } catch (error) {
-        let newErr = { getBooks: error.response.data.message };
-        setError((preError) => ({ ...preError, newErr }));
-      }
-    }
-    getBook();
+    if (searchTerm.length <= 3) return setBooks(fetchAllBooks);
   }, [searchTerm]);
+
+  const fetchBookByQuery = async () => {
+    try {
+      const res = await API.getBookByQuery(searchTerm);
+      setLoading(true);
+      const {
+        data: { books },
+      } = res.data;
+      if (books.length > 0) {
+        setBooks(books);
+        setLoading(false);
+      } else {
+        setBooks(books);
+        setLoading(false);
+      }
+    } catch (error) {
+      let newErr = { getBooks: error.response.data.message };
+      setError((preError) => ({ ...preError, newErr }));
+    }
+  };
+  const handleOnClickSearchButton = (event) => {
+    if (!searchTerm.length) return;
+    return fetchBookByQuery(searchTerm);
+  };
 
   const renderAdminArea = () => (
     <>
       <HeaderWrapper>
         <Header>
-          <Header.Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+          <Header.Search
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            handleOnClickSearchButton={handleOnClickSearchButton}
+          />
           <Link to={`/admin/add-book`}>
             <button className="add_book">To add a new book click here! </button>
           </Link>
@@ -148,7 +157,11 @@ export default function BrowseContainer() {
     <>
       <HeaderWrapper>
         <Header>
-          <Header.Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+          <Header.Search
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            handleOnClickSearchButton={handleOnClickSearchButton}
+          />
           <div className="wrapper__icon__user">
             <Header.IconLink to={ROUTES.MY_ORDER_HISTORY}>
               <FontAwesomeIcon icon={faHistory} color="white" size="lg" title="order history" />
