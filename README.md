@@ -2,6 +2,10 @@
 # Book-store # 🚀
   
 https://book-store-ver1.herokuapp.com
+
+Book store for users that want to purchase
+books and admin area for implement crud (create, read, update, delete)
+
 # **Install**  
 
      1. clone the repo  
